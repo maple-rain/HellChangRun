@@ -23,11 +23,11 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private MiniGameManager miniGameManager;
 
-    private void Awake()
+    protected override void Awake()
     {
         base.Awake();
     }
-    
+ 
 }
 
 
