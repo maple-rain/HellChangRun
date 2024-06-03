@@ -1,3 +1,5 @@
-﻿internal class ItemManager
+﻿using UnityEngine;
+
+internal class ItemManager: MonoBehaviour
 {
 }

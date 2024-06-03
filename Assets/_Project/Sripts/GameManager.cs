@@ -1,7 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using UnityEngine;
+using UnityEngine.XR;
+
+public enum GameState
+{
+    GameStarted,
+    MainScene, //메인화면
+    PlayScene,
+    MinigameStart,
+    MiniGameEnd,
+    ShopScene,
+    GameOver
+}
+
 
 public class GameManager : Singleton<GameManager>
 {
@@ -9,25 +23,17 @@ public class GameManager : Singleton<GameManager>
     private StateManager stateManager;
 
     [SerializeField]
-    private CharacterManager characterManager;
-
-    [SerializeField]
-    private MapManager mapManager;
-
-    [SerializeField]
-    private MapObjectManager mapObjectManager;
-
-    [SerializeField]
     private UIManager uiManager;
-    [SerializeField]
-    private ItemManager itemManager;
-
-    [SerializeField]
-    private MiniGameManager miniGameManager;
-
+    
     [SerializeField]
     private AudioManager audioManager;
-    
+
+    private void Awake()
+    {
+        base.Awake();
+        stateManager.ChangeState(GameState.GameStarted);
+    }
+
 }
 
 

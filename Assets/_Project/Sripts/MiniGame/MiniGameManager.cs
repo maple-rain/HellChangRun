@@ -1,3 +1,5 @@
-﻿internal class MiniGameManager
+﻿using UnityEngine;
+
+internal class MiniGameManager : MonoBehaviour
 {
 }

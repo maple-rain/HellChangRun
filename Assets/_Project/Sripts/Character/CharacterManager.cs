@@ -1,3 +1,6 @@
-﻿internal class CharacterManager
+﻿using UnityEngine;
+
+internal class CharacterManager : MonoBehaviour
 {
+
 }

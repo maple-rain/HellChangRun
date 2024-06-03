@@ -1,3 +1,6 @@
-﻿internal class AudioManager
+﻿using UnityEngine;
+
+internal class AudioManager : MonoBehaviour
 {
+
 }

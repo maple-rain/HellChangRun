@@ -1,3 +1,5 @@
-﻿internal class UIManager
+﻿using UnityEngine;
+
+internal class UIManager : MonoBehaviour
 {
 }
