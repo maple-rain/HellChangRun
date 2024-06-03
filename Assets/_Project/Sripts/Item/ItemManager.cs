@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
-internal class ItemManager: MonoBehaviour
+internal class ItemManager: Singleton<ItemManager>
 {
+
 }
