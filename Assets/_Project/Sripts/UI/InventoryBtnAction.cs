@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class ShopBtnAction : MonoBehaviour
+public class InventoryBtnAction : MonoBehaviour
 {
     public GameObject Equip;
     public GameObject Consumeable;
     public GameObject Randombox;
 
-    public GameObject ShopIteminfo;
+    public GameObject Iteminfo;
 
     public void OpenEquip()
     {
@@ -29,10 +29,11 @@ public class ShopBtnAction : MonoBehaviour
 
     public void OpenItemInfo()
     {
-        ShopIteminfo.SetActive(true);
+        Iteminfo.SetActive(true);
     }
     public void CloseItemInfo()
     {
-        ShopIteminfo.SetActive(false);
+        Iteminfo.SetActive(false);
     }
+
 }
