@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class UIShop : MonoBehaviour
 {
+    [Header("Slot")]
     public Slot[] Equipslots;
     public Transform EquipslotHolder;
 
@@ -10,6 +11,8 @@ public class UIShop : MonoBehaviour
 
     public Slot[] Boxslots;
     public Transform BoxslotHolder;
+
+
     void Start()
     {
         Equipslots = GetComponentsInChildren<Slot>();

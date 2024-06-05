@@ -23,13 +23,14 @@ public class ItemDataConsumable
 }
 
 [CreateAssetMenu(fileName ="Item", menuName ="New Item")]
-public class ItemData : ScriptableObject
+public class ItemData : ScriptableObject 
 {
     [Header("Info")]
-    public string Name;
+    public string itemName;
     public ItemType Type;
-    public string Description;
-    public Sprite itemImage;
+    public string itemDescription;
+    public Sprite itemIcon;
+    public int itemPrice;
 
     [Header("Stacking")]
     public bool CanStack;

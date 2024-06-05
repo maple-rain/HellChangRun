@@ -6,23 +6,18 @@ public class UIInventory : MonoBehaviour
 {
     Inventory inven;
 
+    [Header("Slot")]
     public Slot[] InvenSlot;
-    public Transform InventoryHolder;
+    public Transform EquipslotHolder;
 
-
-    private void Start()
+    private void Awake()
     {
         InvenSlot = GetComponentsInChildren<Slot>();
+    }
+    private void Start()
+    {
         inven = ItemManager.Instance.Inventory;
-        if(inven != null)
-        {
-            inven.onSlotCountChange += slotChange;
-        }
-        else
-        {
-            Debug.Log("error");
-        }
-        
+        inven.onSlotCountChange += slotChange;
     }
 
     private void slotChange(int val)

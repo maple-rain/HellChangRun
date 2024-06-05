@@ -1,32 +1,16 @@
+using UnityEditor.Build;
 using UnityEngine;
 
 public class InventoryBtnAction : MonoBehaviour
 {
     public GameObject Equip;
-    public GameObject Consumeable;
-    public GameObject Randombox;
-
     public GameObject Iteminfo;
+    public GameObject Inventory;
 
     public void OpenEquip()
     {
         Equip.SetActive(true);
-        Consumeable.SetActive(false);
-        Randombox.SetActive(false);
     }
-    public void OpenConsumeable()
-    {
-        Equip.SetActive(false);
-        Consumeable.SetActive(true);
-        Randombox.SetActive(false);
-    }
-    public void OpenRandombox()
-    {
-        Equip.SetActive(false);
-        Consumeable.SetActive(false);
-        Randombox.SetActive(true);
-    }
-
     public void OpenItemInfo()
     {
         Iteminfo.SetActive(true);
@@ -34,6 +18,10 @@ public class InventoryBtnAction : MonoBehaviour
     public void CloseItemInfo()
     {
         Iteminfo.SetActive(false);
+    }
+    public void CloseInvenotry()
+    {
+        Inventory.SetActive(false);
     }
 
 }

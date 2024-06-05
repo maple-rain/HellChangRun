@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
+
     private void Awake()
     {
         ItemManager.Instance.Inventory = this;
@@ -14,7 +15,7 @@ public class Inventory : MonoBehaviour
 
     public int SlotCount
     {
-        get=>slotCnt;
+        get => slotCnt;
         set
         {
             slotCnt = value;

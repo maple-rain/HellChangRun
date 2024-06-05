@@ -22,7 +22,7 @@ public class StartButtonAction : MonoBehaviour
     }
     public void CloseInventory()
     {
-        start.SetActive(true);
         Inventroy.SetActive(false);
+        start.SetActive(true);
     }
 }
