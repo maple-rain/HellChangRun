@@ -11,7 +11,8 @@ public enum ItemType
 public enum ConsumableType
 {
     Weight,
-    Speed
+    Speed,
+    trap
 }
 
 [Serializable]

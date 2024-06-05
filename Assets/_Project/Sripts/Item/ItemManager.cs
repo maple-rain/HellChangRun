@@ -8,4 +8,10 @@ internal class ItemManager: Singleton<ItemManager>
         get { return _item; }
         set { _item = value; }
     }
+    public Inventory _inventory;
+    public Inventory Inventory
+    {
+        get { return _inventory; }
+        set { _inventory = value; }
+    }
 }
