@@ -20,9 +20,4 @@ public class StartButtonAction : MonoBehaviour
         start.SetActive(false);
         Inventroy.SetActive(true);
     }
-    public void CloseInventory()
-    {
-        Inventroy.SetActive(false);
-        start.SetActive(true);
-    }
 }

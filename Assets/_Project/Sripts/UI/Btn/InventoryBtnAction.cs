@@ -6,7 +6,7 @@ public class InventoryBtnAction : MonoBehaviour
     public GameObject Equip;
     public GameObject Iteminfo;
     public GameObject Inventory;
-
+    public GameObject start;
     public void OpenEquip()
     {
         Equip.SetActive(true);
@@ -22,6 +22,6 @@ public class InventoryBtnAction : MonoBehaviour
     public void CloseInvenotry()
     {
         Inventory.SetActive(false);
+        start.SetActive(true);
     }
-
 }

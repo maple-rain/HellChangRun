@@ -5,7 +5,6 @@ public class ShopBtnAction : MonoBehaviour
     public GameObject Equip;
     public GameObject Consumeable;
     public GameObject Randombox;
-
     public GameObject ShopIteminfo;
 
     public void OpenEquip()
