@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 240096649}
   - component: {fileID: 240096646}
   - component: {fileID: 240096647}
-  - component: {fileID: 240096648}
+  - component: {fileID: 240096650}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -171,8 +171,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapParts: {fileID: 6640467021172068084, guid: 865f19fbc9c7cd44ebe1489cd573df9b, type: 3}
+  sideParts: {fileID: 3701608177769636103, guid: d3945193bd7e47a4e8b15df0ad7e1274, type: 3}
   mapPartsCount: 3
-  sideObjectCount: 6
+  sideObjectCount: 2
   playerTransform: {fileID: 1711808614}
 --- !u!114 &240096647
 MonoBehaviour:
@@ -181,21 +182,9 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 240096644}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2bc168a28a001774191e72f90d3b6b8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &240096648
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 240096644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbe12a11240326f44be65a5b0a207fa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &240096649
@@ -213,6 +202,30 @@ MonoBehaviour:
   createMap: {fileID: 0}
   mapObject: {fileID: 0}
   sideMapObject: {fileID: 0}
+--- !u!114 &240096650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 240096644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbe12a11240326f44be65a5b0a207fa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  food:
+  - {fileID: 4616828600858507039, guid: 665f6592d9f9546459df88f319d4f699, type: 3}
+  - {fileID: 7343487203986717441, guid: 259d4de844d6cfb4db196239e6eb6f44, type: 3}
+  - {fileID: 8624381759848721475, guid: 5c970a2bd79b1bf488229ff2f5ad40bb, type: 3}
+  - {fileID: 1796047347388167173, guid: fcbd6225943baf24b90ff57cb946bc91, type: 3}
+  - {fileID: 6912173028487536921, guid: c6d07b968932b444e88f2116a20dad2d, type: 3}
+  - {fileID: 2349809130359384499, guid: 4c0f7a54515467244bc934a45a18a27b, type: 3}
+  - {fileID: 2039417041303211149, guid: ae49a4de0c3919e40a627f364400074a, type: 3}
+  - {fileID: 6250853078986487886, guid: 6e12c5815ac5a2c4ab48f0e2738c2d86, type: 3}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &261594526
 GameObject:
   m_ObjectHideFlags: 0
