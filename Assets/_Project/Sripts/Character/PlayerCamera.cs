@@ -15,7 +15,7 @@ public class PlayerCamera : MonoBehaviour
     private void LateUpdate()
     {
         Vector3 desiredPosition = lookAt.position + offset;
-        desiredPosition.x = 4;
+        desiredPosition.x = 0.5f;
         transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime); 
     }
 }

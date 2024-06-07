@@ -61,7 +61,7 @@ public class CreateMap : MonoBehaviour
                 map.SetActive(true);
                 mapPartsList.Enqueue(map);      
             }
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(1f);
         }
     }
 
@@ -91,7 +91,7 @@ public class CreateMap : MonoBehaviour
                 }
             }
             sideMapPartsList.Enqueue(side);
-            yield return new WaitForSeconds(8f);
+            yield return new WaitForSeconds(3f);
             side.SetActive(false);
         }
     }
