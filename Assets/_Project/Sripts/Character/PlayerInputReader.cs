@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -9,6 +10,8 @@ public class PlayerInputReader : ScriptableObject, PlayerInputActions.IPlayerAct
 {
     public event UnityAction<int> Move = delegate { };
     public event UnityAction<bool> Jump = delegate { };
+    public event UnityAction<bool> DoubleJump = delegate { };
+    public event UnityAction<bool> Slide = delegate { };
 
     PlayerInputActions inputActions;
 
@@ -55,5 +58,32 @@ public class PlayerInputReader : ScriptableObject, PlayerInputActions.IPlayerAct
                 Jump.Invoke(false);
                 break;
         }
-    }    
+    }
+
+    public void OnDoubleJump(InputAction.CallbackContext context)
+    {
+        switch (context.phase)
+        {
+            case InputActionPhase.Started:
+                DoubleJump.Invoke(true);
+                break;
+            case InputActionPhase.Canceled:
+                DoubleJump.Invoke(false);
+                break;
+        }
+    }
+
+    public void OnSlide(InputAction.CallbackContext context)
+    {
+        switch (context.phase)
+        {
+            case InputActionPhase.Started:
+                Slide.Invoke(true);
+                break;
+            case InputActionPhase.Canceled:
+                
+                Slide.Invoke(false);
+                break;
+        }
+    }
 }

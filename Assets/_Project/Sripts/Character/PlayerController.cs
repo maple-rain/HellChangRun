@@ -16,16 +16,24 @@ public class PlayerController : MonoBehaviour
     //[SerializeField] float maximumSpeed = 30f;
     //[SerializeField] float playerSpeedIncreaseRate = 0.1f;
     //[SerializeField] float playerSpeedDecreaseRate = -0.1f;
-    
-
     [Header("Jump Settings")]
-    [SerializeField] float jumpForce = 10f;
+    [SerializeField] float jumpForce = 15f;
+    [SerializeField] float doubleJumpForce = 20f;
     [SerializeField] float jumpDuration = 0.5f;
     [SerializeField] float jumpCooldown = 0f;
     [SerializeField] float gravityMultiplier = 3f;
+    private int numberOfJumps;
+    public int maxNumberOfJumps = 2;
+
+    [Header("Sliding Settings")]
+    [SerializeField] float slideDuration = 0.5f;
+    [SerializeField] float slideCoolDown = 0.5f;
+    [SerializeField] AnimationClip slideAnimationClip;
+    private bool sliding = false;
+    
 
     [Header("Lane Position")]
-    [SerializeField] const float laneDistance = 8f;
+    [SerializeField] float laneDistance = 8f;
     [SerializeField] float laneSwitchSpeed= 10f;
     [SerializeField] float smoothTime = 0.2f;
     int currentLane = 0;
@@ -40,6 +48,8 @@ public class PlayerController : MonoBehaviour
     List<Timer> timers;
     CountdownTimer jumpTimer;
     CountdownTimer jumpCooldownTimer;
+    CountdownTimer slideTimer;
+    CountdownTimer slideCooldownTimer;
     CharacterController characterController;
     StateMachine stateMachine;
 
@@ -58,8 +68,12 @@ public class PlayerController : MonoBehaviour
 
         var runState = new RunState(this, animator);
         var jumpState = new JumpState(this,animator);
+        var doubleJumpState = new DoubleJumpState(this,animator);
+        var slideState = new SlideState(this,animator);
 
         At(runState, jumpState, new FuncPredicate(() => jumpTimer.IsRunning));
+        At(jumpState,doubleJumpState, new FuncPredicate(() => jumpTimer.IsRunning && numberOfJumps ==2));
+        At(runState, slideState, new FuncPredicate(() => !sliding && IsGrounded() &&!jumpTimer.IsRunning));
         Any(runState, new FuncPredicate(ReturnToRunState));
 
         stateMachine.SetState(runState); 
@@ -77,11 +91,15 @@ public class PlayerController : MonoBehaviour
     {
         jumpTimer = new CountdownTimer(jumpDuration);
         jumpCooldownTimer = new CountdownTimer(jumpCooldown);
-
         jumpTimer.OnTimerStart += () => jumpVelocity = jumpForce;
         jumpTimer.OnTimerStop += () => jumpCooldownTimer.Start();
 
-        timers = new List<Timer>(2) { jumpTimer,jumpCooldownTimer };
+        slideTimer = new CountdownTimer(slideDuration);
+        slideCooldownTimer = new CountdownTimer(slideCoolDown);
+        slideTimer.OnTimerStart += () => slideCooldownTimer.Stop();
+        slideTimer.OnTimerStart += () => slideCooldownTimer.Start();
+        
+        timers = new List<Timer>(4) { jumpTimer,jumpCooldownTimer,slideCooldownTimer,slideTimer};
     }
 
     private void Start() => playerInputReader.EnablePlayerActions();
@@ -91,26 +109,32 @@ public class PlayerController : MonoBehaviour
     {
         playerInputReader.Move += OnMove;
         playerInputReader.Jump += OnJump;
+        playerInputReader.DoubleJump += OnDoubleJump;
+        playerInputReader.Slide += OnSlide;
     }
 
     private void OnDisable()
     {
         playerInputReader.Move -= OnMove;
         playerInputReader.Jump -= OnJump;
+        playerInputReader.DoubleJump -= OnDoubleJump;
+        playerInputReader.Slide -= OnSlide;
     }
 
     private void Update()
     { 
         stateMachine.Update();
        HandleTimers();
+       
+        if(IsGrounded() && !jumpTimer.IsRunning)
+        {
+            numberOfJumps = 0;
+        }
+        Debug.Log(numberOfJumps);
     }
     private void FixedUpdate()
-    {
-      
-        stateMachine.FixedUpdate();
-        //HandleMove();
-        //HandleJump();
-        
+    {     
+        stateMachine.FixedUpdate();      
     }
 
     void HandleTimers()
@@ -123,14 +147,33 @@ public class PlayerController : MonoBehaviour
 
     private void OnJump(bool performed)
     {
-        if(performed && !jumpTimer.IsRunning && !jumpCooldownTimer.IsRunning && IsGrounded())
+        if(performed && numberOfJumps ==0 && !jumpTimer.IsRunning && !jumpCooldownTimer.IsRunning 
+           && IsGrounded())
         {
+            numberOfJumps++;
             jumpTimer.Start();
             jumpVelocity = jumpForce;
+        }
+        else if(!performed && jumpTimer.IsRunning )
+        {
+            jumpTimer.Stop();
+            
+        }
+    }
+
+    private void OnDoubleJump(bool performed)
+    {
+        if(performed && numberOfJumps ==1
+            && numberOfJumps < maxNumberOfJumps && !jumpTimer.IsRunning && !jumpCooldownTimer.IsRunning)
+        {
+            numberOfJumps++;
+            jumpTimer.Start();
+            jumpVelocity = doubleJumpForce;
         }
         else if(!performed && jumpTimer.IsRunning)
         {
             jumpTimer.Stop();
+            
         }
     }
 
@@ -157,9 +200,18 @@ public class PlayerController : MonoBehaviour
 
         }
         isSwitching = false;
+    }
 
-       
-        Debug.Log(direction);
+    public void OnSlide(bool performed)
+    {
+        if(performed && !sliding && IsGrounded())
+        {
+            slideTimer.Start();
+        }
+        else if(!performed && slideTimer.IsRunning)
+        {
+            slideTimer.Stop();
+        }
     }
 
     private void CheckCurrentLane()
@@ -213,10 +265,29 @@ public class PlayerController : MonoBehaviour
         isSwitching = false;             
     }
 
+    public IEnumerator Slide()
+    {
+        //콜라이더 크기 조정
+        Vector3 originalControllerCenter = characterController.center;
+        Vector3 newControllerCenter = originalControllerCenter;
+        characterController.height /= 2;
+        newControllerCenter.y -= characterController.height /2;
+        characterController.center = newControllerCenter;
+
+        sliding = true;
+
+        yield return new WaitForSeconds(slideAnimationClip.length);
+
+        characterController.height *= 2;
+        characterController.center = originalControllerCenter;
+        sliding = false;
+    }
+
     public void HandleMove()
     {
         characterController.Move(transform.forward * initialSpeed * Time.deltaTime);
     }
+
 
     public void HandleJump()
     {
@@ -226,7 +297,6 @@ public class PlayerController : MonoBehaviour
             jumpTimer.Stop();
             return;
         }
-
         if(!jumpTimer.IsRunning)
         {
             jumpVelocity += Physics.gravity.y * gravityMultiplier * Time.fixedDeltaTime;
@@ -236,6 +306,18 @@ public class PlayerController : MonoBehaviour
         characterController.Move(jumpVector * Time.fixedDeltaTime);
     }
 
+    public void HandleSlide()
+    {
+        if(!slideTimer.IsRunning && !IsGrounded())
+        {
+            slideTimer.Stop();
+            return;
+        }
+        if(!slideTimer.IsRunning && IsGrounded())
+        {
+            StartCoroutine(Slide());
+        }
+    }
     private bool IsGrounded(float length = 0.5f)
     {
         Vector3 raycastOriginFirst = transform.position;
@@ -254,8 +336,5 @@ public class PlayerController : MonoBehaviour
             return true;
         }
         return false;
-
-
-
     }
 }

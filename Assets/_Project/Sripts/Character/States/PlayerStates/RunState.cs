@@ -9,6 +9,7 @@ public class RunState : BaseState
     public override void OnEnter()
     {
         animator.CrossFade(RunHash, crossFadeDuration);
+        player.transform.rotation = Quaternion.identity;
     }
 
     public override void FixedUpdate()

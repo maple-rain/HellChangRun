@@ -7,6 +7,8 @@ public abstract class BaseState : IState
 
     protected static readonly int RunHash = Animator.StringToHash("Run");
     protected static readonly int JumpHash = Animator.StringToHash("Jump");
+    protected static readonly int DoubleJumpHash = Animator.StringToHash("DoubleJump");
+    protected static readonly int SlideHash = Animator.StringToHash("Slide");
 
     protected const float crossFadeDuration = 0.1f;
 
