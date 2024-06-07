@@ -2,20 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ItemType
+public enum MapItemType
 {
     Food,
     Consumable
 }
 
-public enum ConsumableType
+public enum MapItemConsumableType
 {
     PlayerSpeedUp,
     KeepPlayerWeight,
     TrainerSpeedDown
 }
 
-public enum FoodType
+public enum MapItemFoodType
 {
     HealthFood,
     JunkFood
@@ -24,6 +24,6 @@ public enum FoodType
 public class MapItemScriptableObject : ScriptableObject
 {
     [Header("Info")]
-    public ItemType itemType;
+    public MapItemType itemType;
     public GameObject dropPrefab;
 }

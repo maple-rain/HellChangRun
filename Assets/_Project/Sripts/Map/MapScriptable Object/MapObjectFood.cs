@@ -6,6 +6,6 @@ using UnityEngine;
 public class MapObjectFood : MapItemScriptableObject
 {
     [Header("Food Type")]
-    public FoodType foodType;
+    public MapItemFoodType foodType;
     public float value;
 }

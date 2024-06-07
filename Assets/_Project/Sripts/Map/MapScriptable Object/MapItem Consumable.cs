@@ -6,6 +6,6 @@ using UnityEngine;
 public class MapItemConsumable : MapItemScriptableObject
 {
     [Header("Consumable Type")]
-    public ConsumableType consumableType;
+    public MapItemConsumableType consumableType;
     public float value;
 }
