@@ -14,8 +14,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private CharacterManager characterManager;
 
-    [SerializeField]
-    private MapManager mapManager;
+    public MapManager mapManager;
 
     [SerializeField]
     private ItemManager itemManager;
