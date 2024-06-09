@@ -12,6 +12,7 @@ public class PlayerInputReader : ScriptableObject, PlayerInputActions.IPlayerAct
     public event UnityAction<bool> Jump = delegate { };
     public event UnityAction<bool> DoubleJump = delegate { };
     public event UnityAction<bool> Slide = delegate { };
+    public event UnityAction<int> UseItem = delegate { };
 
     PlayerInputActions inputActions;
 
@@ -75,15 +76,18 @@ public class PlayerInputReader : ScriptableObject, PlayerInputActions.IPlayerAct
 
     public void OnSlide(InputAction.CallbackContext context)
     {
-        switch (context.phase)
+        //switch (context.phase)
+        //{
+        //    case InputActionPhase.Performed:
+        //        Slide.Invoke(true);
+        //        break;
+        //    case InputActionPhase.Canceled:
+        //        Slide.Invoke(false);
+        //        break;
+        //}
+        if(context.phase == InputActionPhase.Started)
         {
-            case InputActionPhase.Started:
-                Slide.Invoke(true);
-                break;
-            case InputActionPhase.Canceled:
-                
-                Slide.Invoke(false);
-                break;
-        }
+            Slide.Invoke(true);
+        }       
     }
 }
