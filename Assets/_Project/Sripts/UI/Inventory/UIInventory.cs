@@ -39,6 +39,7 @@ public class UIInventory : MonoBehaviour
             QuickSlots[i].inventory = this;
         }
 
+
         //for (int i = 0; i < InvenSlot.Length; i++)
         //{
         //    int index = i; 
@@ -46,6 +47,14 @@ public class UIInventory : MonoBehaviour
         //}
         //ClearItemUI();
         //inven.onSlotCountChange += slotChange;
+    }
+    public QuickSlot GetQuickSlot(int index)
+    {
+        if (index >= 0 && index < QuickSlots.Length)
+        {
+            return QuickSlots[index];
+        }
+        return null;
     }
 
     //void OnItemSlotClick(int index)

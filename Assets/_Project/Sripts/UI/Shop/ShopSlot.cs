@@ -64,6 +64,7 @@ public class ShopSlot : MonoBehaviour
                 return;
             }
         }
+
         ItemSlot emptySlot = GetItemEmpty();
         // ¿÷¿Ω?
         if (emptySlot != null)

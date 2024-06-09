@@ -6,15 +6,17 @@ using UnityEngine.UI;
 public class ItemSlot : MonoBehaviour
 {
     public ItemData itemData;
-    public QuickSlot quickSlot;
     public UIInventory inventory;
+    public QuickSlot quickSlot;
     public TextMeshProUGUI quatityText;
     public int index;
     public bool equipped;
     public int quantity;
     public Button itemInfoButton;
+    public Button EquipBtn;
     public GameObject itemInfo;
     public Image icon;
+    public int slotIndex;
 
     public TextMeshProUGUI itemNameText;
     public TextMeshProUGUI itemDescriptionText;
@@ -22,19 +24,16 @@ public class ItemSlot : MonoBehaviour
     public TextMeshProUGUI ItemStatValue;
     public Image itemIconImage;
     public TextMeshProUGUI itemPriceText;
+    
 
     private void Start()
     {
-        quantity = 0;
-    }
-
-    void Update()
-    {
+        if (inventory != null)
+        {
+            quickSlot = inventory.GetQuickSlot(slotIndex);
+        }
         itemInfoButton.onClick.AddListener(UpdateItemUI);
-    }
-    void QucikSlotUpdate()
-    {
-        //quickSlot.SetSlot();
+        quantity = 0;
     }
     public void UpdateItemUI()
     {
@@ -53,10 +52,15 @@ public class ItemSlot : MonoBehaviour
                 ItemStatName.text += itemData.coumsumables[i].type.ToString() + "\n";
                 ItemStatValue.text += itemData.coumsumables[i].value.ToString() + "\n";
             }
+            //EquipBtn.onClick.AddListener(Quickregistration);
+            Debug.Log(this);
             QucikSlotUpdate();
-            Debug.Log(quickSlot.itemData);
+            
         }
-        
+    }
+    public void QucikSlotUpdate()
+    {
+        quickSlot.SetSlot(this);
     }
     public void Set()
     {
@@ -76,42 +80,43 @@ public class ItemSlot : MonoBehaviour
         inventory.SetItem(index);
     }
 
-
-    public void Quickregistration()
-    {
-        QuickSlot emptySlot = GetItemEmpty();
-        if (emptySlot != null)
-        {
-            emptySlot.itemData = itemData;
-            //emptySlot.quantity = slot.quantity;
-            Debug.Log($"µÎ¹øÂ° {emptySlot.itemData}");
-            UpdateUI();
-            return;
-        }
-    }
-    private void UpdateUI()
-    {
-        for (int i = 0; i < inventory.QuickSlots.Length; i++)
-        {
-            if (inventory.QuickSlots[i].itemData != null)
-            {
-                inventory.QuickSlots[i].Set();
-            }
-            else
-            {
-                inventory.QuickSlots[i].Clear();
-            }
-        }
-    }
-    private QuickSlot GetItemEmpty()
-    {
-        for (int i = 0; i < inventory.QuickSlots.Length; i++)
-        {
-            if (inventory.QuickSlots[i].itemData == null)
-            {
-                return inventory.QuickSlots[i];
-            }
-        }
-        return null;
-    }
+    #region Äü½½·Ô 
+    //public void Quickregistration()
+    //{
+    //    QuickSlot emptySlot = GetItemEmpty();
+    //    if (emptySlot != null)
+    //    {
+    //        emptySlot.itemData = itemData;
+    //        emptySlot.quantity = quantity;
+    //        Debug.Log($"µÎ¹øÂ° {emptySlot.itemData}");
+    //        UpdateUI();
+    //        return;
+    //    }
+    //}
+    //private void UpdateUI()
+    //{
+    //    for (int i = 0; i < inventory.QuickSlots.Length; i++)
+    //    {
+    //        if (inventory.QuickSlots[i].itemData != null)
+    //        {
+    //            inventory.QuickSlots[i].Set();
+    //        }
+    //        else
+    //        {
+    //            inventory.QuickSlots[i].Clear();
+    //        }
+    //    }
+    //}
+    //private QuickSlot GetItemEmpty()
+    //{
+    //    for (int i = 0; i < inventory.QuickSlots.Length; i++)
+    //    {
+    //        if (inventory.QuickSlots[i].itemData == null)
+    //        {
+    //            return inventory.QuickSlots[i];
+    //        }
+    //    }
+    //    return null;
+    //}
+    #endregion
 }
