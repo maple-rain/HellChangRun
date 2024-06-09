@@ -9,13 +9,16 @@ public class UIInventory : MonoBehaviour
     public ItemSlot[] InvenSlot;
     public Transform InvenSlotHolder;
 
+    public QuickSlot[] QuickSlots;
+    public Transform QuickSlotsHolder;
+
     Inventory inven;
 
-    [Header("Select Item")]
-    public TextMeshProUGUI ItemName;
-    public TextMeshProUGUI ItemDescription;
-    public TextMeshProUGUI ItemStatName;
-    public TextMeshProUGUI ItemStatValue;
+    //[Header("Select Item")]
+    //public TextMeshProUGUI ItemName;
+    //public TextMeshProUGUI ItemDescription;
+    //public TextMeshProUGUI ItemStatName;
+    //public TextMeshProUGUI ItemStatValue;
     public Image ItemIcon;
 
 
@@ -28,9 +31,37 @@ public class UIInventory : MonoBehaviour
             InvenSlot[i].index = i;
             InvenSlot[i].inventory = this;
         }
-        ClearItemUI();
+
+        QuickSlots = GetComponentsInChildren<QuickSlot>();
+        for (int i = 0; i < QuickSlots.Length; i++)
+        {
+            QuickSlots[i].index = i;
+            QuickSlots[i].inventory = this;
+        }
+
+        //for (int i = 0; i < InvenSlot.Length; i++)
+        //{
+        //    int index = i; 
+        //    InvenSlot[i].GetComponent<Button>().onClick.AddListener(() => OnItemSlotClick(index));
+        //}
+        //ClearItemUI();
         //inven.onSlotCountChange += slotChange;
     }
+
+    //void OnItemSlotClick(int index)
+    //{
+    //    Debug.Log($"{index}번째 클릭  ");
+
+    //    // Assign the clicked slot to an empty quick slot
+    //    for (int i = 0; i < QuickSlots.Length; i++)
+    //    {
+    //        if (QuickSlots[i].itemData == null)
+    //        {
+    //            QuickSlots[i].SetSlot(InvenSlot[index]);
+    //            break;
+    //        }
+    //    }
+    //}
 
     #region 인벤토리슬롯 추가
     private void slotChange(int val)
@@ -54,13 +85,13 @@ public class UIInventory : MonoBehaviour
     }
     #endregion
 
-    void ClearItemUI()
-    {
-        ItemName.text = string.Empty;
-        ItemDescription.text = string.Empty;
-        ItemStatName.text = string.Empty;
-        ItemStatValue.text = string.Empty;
-    }
+    //void ClearItemUI()
+    //{
+    //    ItemName.text = string.Empty;
+    //    ItemDescription.text = string.Empty;
+    //    ItemStatName.text = string.Empty;
+    //    ItemStatValue.text = string.Empty;
+    //}
 
     public void SetItem(int index)
     {
