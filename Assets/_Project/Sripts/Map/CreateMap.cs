@@ -117,7 +117,7 @@ public class CreateMap : MonoBehaviour
     private void setPosition(GameObject obj , float i)
     {
         Vector3 newPosition = new Vector3(obj.transform.position.x ,0,playerTransform.position.z);
-        newPosition.z += 7 * i; 
+        newPosition.z += 21 * i; 
         obj.transform.position = newPosition;
     }   
 }
