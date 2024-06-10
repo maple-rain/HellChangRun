@@ -103,11 +103,12 @@ public class CreateMap : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(2f);
+            int randomY = Random.Range(1, 8);
             Vector3[] randomRoad =
             {
-                new Vector3(-8f,1f,playerTransform.position.z + 20f),
-                new Vector3(0f,1f,playerTransform.position.z + 20f),
-                new Vector3(8f,1f,playerTransform.position.z + 20f)
+                new Vector3(-8f,randomY,playerTransform.position.z + 20f),
+                new Vector3(0f,randomY,playerTransform.position.z + 20f),
+                new Vector3(8f,randomY,playerTransform.position.z + 20f)
             };
             int randomSapwn = Random.Range(0,randomRoad.Length);
 
