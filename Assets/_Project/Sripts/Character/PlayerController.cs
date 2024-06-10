@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-       capsuleCollider = GetComponent<CapsuleCollider>();
+        capsuleCollider = GetComponent<CapsuleCollider>();
         characterController= GetComponent<CharacterController>();
         //groundChecker = GetComponent<GroundChecker>();
         SetupTimers();
@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
 
         At(runState, jumpState, new FuncPredicate(() => jumpTimer.IsRunning));
         At(jumpState,doubleJumpState, new FuncPredicate(() => jumpTimer.IsRunning && numberOfJumps ==2));
-        At(runState, slideState, new FuncPredicate(() => !sliding && IsGrounded() &&!jumpTimer.IsRunning));
+        At(runState, slideState, new FuncPredicate(() => slideTimer.IsRunning));
         Any(runState, new FuncPredicate(ReturnToRunState));
 
         stateMachine.SetState(runState); 
@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
 
     bool ReturnToRunState()
     {
-        return IsGrounded() && !jumpTimer.IsRunning;
+        return IsGrounded() && !jumpTimer.IsRunning && !slideTimer.IsRunning;
     }
 
     private void SetupTimers()
@@ -103,8 +103,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Start() => playerInputReader.EnablePlayerActions();
-    
-    
+       
     private void OnEnable()
     {
         playerInputReader.Move += OnMove;
@@ -132,6 +131,7 @@ public class PlayerController : MonoBehaviour
         }
         Debug.Log(numberOfJumps);
     }
+    
     private void FixedUpdate()
     {     
         stateMachine.FixedUpdate();      
@@ -204,9 +204,9 @@ public class PlayerController : MonoBehaviour
 
     public void OnSlide(bool performed)
     {
-        if(performed && !sliding && IsGrounded())
+        if(performed && IsGrounded() && !slideTimer.IsRunning)
         {
-            slideTimer.Start();
+            slideTimer.Start();           
         }
         else if(!performed && slideTimer.IsRunning)
         {
@@ -265,29 +265,10 @@ public class PlayerController : MonoBehaviour
         isSwitching = false;             
     }
 
-    public IEnumerator Slide()
-    {
-        //콜라이더 크기 조정
-        Vector3 originalControllerCenter = characterController.center;
-        Vector3 newControllerCenter = originalControllerCenter;
-        characterController.height /= 2;
-        newControllerCenter.y -= characterController.height /2;
-        characterController.center = newControllerCenter;
-
-        sliding = true;
-
-        yield return new WaitForSeconds(slideAnimationClip.length);
-
-        characterController.height *= 2;
-        characterController.center = originalControllerCenter;
-        sliding = false;
-    }
-
     public void HandleMove()
     {
         characterController.Move(transform.forward * initialSpeed * Time.deltaTime);
     }
-
 
     public void HandleJump()
     {
@@ -308,15 +289,33 @@ public class PlayerController : MonoBehaviour
 
     public void HandleSlide()
     {
-        if(!slideTimer.IsRunning && !IsGrounded())
+        if (!slideTimer.IsRunning && !sliding)
         {
             slideTimer.Stop();
             return;
         }
-        if(!slideTimer.IsRunning && IsGrounded())
+        if (!slideTimer.IsRunning && IsGrounded() &&!sliding)
         {
             StartCoroutine(Slide());
         }
+    }
+
+    public IEnumerator Slide()
+    {
+        //콜라이더 크기 조정
+        Vector3 originalControllerCenter = characterController.center;
+        Vector3 newControllerCenter = originalControllerCenter;
+        characterController.height /= 2;
+        newControllerCenter.y -= characterController.height / 2;
+        characterController.center = newControllerCenter;
+
+        sliding = true;
+
+        yield return new WaitForSeconds(slideAnimationClip.length);
+
+        characterController.height *= 2;
+        characterController.center = originalControllerCenter;
+        sliding = false;
     }
     private bool IsGrounded(float length = 0.5f)
     {
@@ -328,7 +327,7 @@ public class PlayerController : MonoBehaviour
         raycastOriginFirst -= transform.forward * 0.2f;
         raycastOriginSecond += transform.forward * 0.2f;
 
-        Debug.DrawLine(raycastOriginFirst, Vector3.down, Color.red, 2f);
+        //Debug.DrawLine(raycastOriginFirst, Vector3.down, Color.red, 2f);
 
         if (Physics.Raycast(raycastOriginFirst, Vector3.down, out RaycastHit hit, length, groundLayer) ||
             Physics.Raycast(raycastOriginSecond, Vector3.down, out RaycastHit hit2, length, groundLayer))

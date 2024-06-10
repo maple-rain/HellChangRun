@@ -17,7 +17,6 @@ public class JumpState : BaseState
 
     public override void FixedUpdate()
     {
-
         //플레이어 점프와 움직임 로직 호출
         player.HandleJump();
         player.HandleMove();

@@ -6,6 +6,7 @@ public class PlayerCamera : MonoBehaviour
 {
     [SerializeField] Transform lookAt;
     [SerializeField] Vector3 offset;
+    [SerializeField] float cameraSpeed;
 
     private void Start()
     {
@@ -16,6 +17,6 @@ public class PlayerCamera : MonoBehaviour
     {
         Vector3 desiredPosition = lookAt.position + offset;
         desiredPosition.x = 0.5f;
-        transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime); 
+        transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * cameraSpeed); 
     }
 }
