@@ -11,6 +11,7 @@ public class UIInventory : MonoBehaviour
     Inventory inven;
     public ItemSlot seletedItem;
     public Image ItemIcon;
+
     public void Awake()
     {
         inven = ItemManager.Instance.Inventory;
@@ -26,6 +27,7 @@ public class UIInventory : MonoBehaviour
             QuickSlots[i].index = i;
             QuickSlots[i].inventory = this;
         }
+        //inven.onSlotCountChange += slotChange;
     }
     #region 인벤토리슬롯 추가
     private void slotChange(int val)
@@ -41,6 +43,7 @@ public class UIInventory : MonoBehaviour
                 InvenSlot[i].GetComponent<Button>().interactable = false;
             }
         }
+        
     }
     public void AddSlot()
     {

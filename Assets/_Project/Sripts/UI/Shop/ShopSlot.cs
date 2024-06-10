@@ -88,7 +88,7 @@ public class ShopSlot : MonoBehaviour
         {
             if (Inventory.InvenSlot[i].itemData != null)
             {
-                Inventory.InvenSlot[i].Set();                           
+                Inventory.InvenSlot[i].Set();                       
             }
             else
             {

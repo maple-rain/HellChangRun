@@ -17,7 +17,7 @@ public class QuickSlot : MonoBehaviour
     }
     public void Set()
     {
-        quatityText.text = inventory.seletedItem.quantity > 1 ? inventory.seletedItem.quantity.ToString() : string.Empty;
+        quatityText.text = inventory.seletedItem.quantity >= 1 ? inventory.seletedItem.quantity.ToString() : string.Empty;
     }
     public void Clear()
     {

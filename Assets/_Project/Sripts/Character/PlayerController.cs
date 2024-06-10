@@ -12,7 +12,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask groundLayer;
 
     [Header("Movement Settings")]
-    [SerializeField] float initialSpeed = 6f;
+    public float initialSpeed;
+
     //[SerializeField] float maximumSpeed = 30f;
     //[SerializeField] float playerSpeedIncreaseRate = 0.1f;
     //[SerializeField] float playerSpeedDecreaseRate = -0.1f;
