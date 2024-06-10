@@ -8,12 +8,12 @@ public class WeightController : MonoBehaviour
     public PlayerController player;
 
     private float MaxWeghit;
-    private float CurWeghit;
+    private float CurWeghit; 
     private float playerScale;
     private void Start()
     {
-        MaxWeghit = 100;
-        CurWeghit = 50;
+        MaxWeghit = 100f;
+        CurWeghit = 50f;
     }
 
     private void Update()
@@ -29,7 +29,15 @@ public class WeightController : MonoBehaviour
 
     public void loseWeghit()
     {
-        CurWeghit -= Time.deltaTime;
+        CurWeghit -= Time.deltaTime*0.5f;
+    }
+    public void Consume(float loseWeight)
+    {
+        CurWeghit -= loseWeight;
+    }
+    public void JunkConsume(float GainWeight)
+    {
+        CurWeghit += GainWeight;
     }
     public void PlayerBuff()
     {

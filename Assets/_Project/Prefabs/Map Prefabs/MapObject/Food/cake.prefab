@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 5160520370162747076}
   - component: {fileID: 5740602923329461191}
   - component: {fileID: -5809541418783620377}
+  - component: {fileID: -630443634136794596}
+  - component: {fileID: 41891545977384676}
   - component: {fileID: 835305484072109172}
   m_Layer: 0
   m_Name: cake
@@ -79,6 +81,31 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 94
   m_CollisionDetection: 0
+--- !u!114 &-630443634136794596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796047347388167173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12ae8f209eff48245b8e040162d14a51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &41891545977384676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796047347388167173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 152f7c5a37137854f9ee2bbfcd341f54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gainWeight: 0.5
 --- !u!65 &835305484072109172
 BoxCollider:
   m_ObjectHideFlags: 0

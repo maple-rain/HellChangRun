@@ -758,6 +758,8 @@ GameObject:
   - component: {fileID: 4120962737956527798}
   - component: {fileID: 5067268312045894285}
   - component: {fileID: 5391963071065858925}
+  - component: {fileID: -990216854209274002}
+  - component: {fileID: -565826583391111683}
   - component: {fileID: 4663787397362696856}
   m_Layer: 0
   m_Name: burgerDouble
@@ -830,6 +832,31 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 94
   m_CollisionDetection: 0
+--- !u!114 &-990216854209274002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7343487203986717441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12ae8f209eff48245b8e040162d14a51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-565826583391111683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7343487203986717441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 152f7c5a37137854f9ee2bbfcd341f54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gainWeight: 5
 --- !u!65 &4663787397362696856
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -12,7 +12,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask groundLayer;
 
     [Header("Movement Settings")]
-    public float initialSpeed;
+    
+    public float initialSpeed = 16f;
+    [SerializeField] public float currentSpeed;
+    [SerializeField] public float maximumSpeed = 16f;
+    [SerializeField] float playerSpeedIncreaseRate = 0.1f;
+    [SerializeField] float playerSpeedDecreaseRate = -0.1f;
 
     //[SerializeField] float maximumSpeed = 30f;
     //[SerializeField] float playerSpeedIncreaseRate = 0.1f;
@@ -42,8 +47,6 @@ public class PlayerController : MonoBehaviour
     Vector3 moveVector = Vector3.zero;
     bool isSwitching;
     const float ZeroF = 0f;
-    float currentSpeed;
-    float velocity;
     float jumpVelocity;
 
     List<Timer> timers;
@@ -227,6 +230,17 @@ public class PlayerController : MonoBehaviour
             currentLane = 1;
             return;
         }
+    }
+    public void IncreaseSpeed(float speedChangeRate)
+    {
+        Debug.Log("Enter.IncreaseSpeed");
+        currentSpeed += speedChangeRate;
+    }
+
+    public void DecreaseSpeed(float speedChangeRate)
+    {
+        Debug.Log("Enter.DecreaseSpeed");
+        currentSpeed -= speedChangeRate;
     }
 
     private IEnumerator SmoothMove(Vector3 targetPosition) 
