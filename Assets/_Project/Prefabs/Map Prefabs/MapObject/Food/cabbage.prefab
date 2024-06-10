@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3053511868135360284}
   - component: {fileID: 9017885683695997034}
   - component: {fileID: 4135284108298094070}
+  - component: {fileID: -7368168314412575468}
   m_Layer: 0
   m_Name: cabbage
   m_TagString: Untagged
@@ -98,10 +99,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 825573ec47e9a3e46ac11b83cf0ccf06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapItemScriptableObject: {fileID: 11400000, guid: fb01e48ec9c90e24eacd4afa153709cd, type: 2}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!54 &4135284108298094070
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -129,3 +126,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 94
   m_CollisionDetection: 0
+--- !u!65 &-7368168314412575468
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8624381759848721475}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.37945, y: 0.3073915, z: 0.40361336}
+  m_Center: {x: 0, y: 0.15369575, z: 0}

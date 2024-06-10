@@ -180,6 +180,7 @@ GameObject:
   - component: {fileID: 322049700632716801}
   - component: {fileID: 4481871447632199314}
   - component: {fileID: -8770104467092233754}
+  - component: {fileID: -2975039982060186172}
   m_Layer: 0
   m_Name: hotDog
   m_TagString: Untagged
@@ -266,10 +267,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 825573ec47e9a3e46ac11b83cf0ccf06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapItemScriptableObject: {fileID: 11400000, guid: f6797f22ea78f4f45bd45532425587ca, type: 2}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!54 &-8770104467092233754
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -297,3 +294,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 94
   m_CollisionDetection: 0
+--- !u!65 &-2975039982060186172
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6250853078986487886}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.42802235, y: 0.1315627, z: 0.202554}
+  m_Center: {x: 0, y: 0.06578135, z: 0}
