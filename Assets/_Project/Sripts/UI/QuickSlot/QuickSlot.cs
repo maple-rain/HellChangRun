@@ -11,6 +11,8 @@ public class QuickSlot : MonoBehaviour
     public Button QuickSlotButton;
     public Image icon;
     public UIInventory inventory;
+
+
     public void Start()
     {
         QuickSlotButton.onClick.AddListener(() => inventory.Quickregistration(index));
