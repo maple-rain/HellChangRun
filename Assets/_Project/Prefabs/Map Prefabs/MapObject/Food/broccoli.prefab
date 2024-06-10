@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2746984957384649330}
   - component: {fileID: 1083445078616488295}
   - component: {fileID: 177654127162137459}
+  - component: {fileID: 5538197748959061652}
   m_Layer: 0
   m_Name: broccoli
   m_TagString: Untagged
@@ -98,10 +99,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 825573ec47e9a3e46ac11b83cf0ccf06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapItemScriptableObject: {fileID: 11400000, guid: a86c0129ea26c5a4d81b8c487ea4c9d8, type: 2}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 55
 --- !u!54 &177654127162137459
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -129,3 +126,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 94
   m_CollisionDetection: 0
+--- !u!65 &5538197748959061652
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4616828600858507039}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.37517977, y: 0.421668, z: 0.37517977}
+  m_Center: {x: 0, y: 0.210834, z: 0}

@@ -758,6 +758,7 @@ GameObject:
   - component: {fileID: 4120962737956527798}
   - component: {fileID: 5067268312045894285}
   - component: {fileID: 5391963071065858925}
+  - component: {fileID: 4663787397362696856}
   m_Layer: 0
   m_Name: burgerDouble
   m_TagString: Untagged
@@ -802,10 +803,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 825573ec47e9a3e46ac11b83cf0ccf06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapItemScriptableObject: {fileID: 11400000, guid: 379da64e4ea3d994485659603b0ab2cf, type: 2}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 55
 --- !u!54 &5391963071065858925
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -833,6 +830,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 94
   m_CollisionDetection: 0
+--- !u!65 &4663787397362696856
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7343487203986717441}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8049750010599363384
 GameObject:
   m_ObjectHideFlags: 0

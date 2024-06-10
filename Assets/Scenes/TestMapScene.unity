@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 240096646}
   - component: {fileID: 240096647}
   - component: {fileID: 240096650}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Map
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -245,8 +245,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapParts: {fileID: 6640467021172068084, guid: 865f19fbc9c7cd44ebe1489cd573df9b, type: 3}
   sideParts: {fileID: 3701608177769636103, guid: d3945193bd7e47a4e8b15df0ad7e1274, type: 3}
-  mapPartsCount: 3
-  sideObjectCount: 2
+  mapPartsCount: 11
+  sideObjectCount: 3
   playerTransform: {fileID: 1732017055}
 --- !u!114 &240096647
 MonoBehaviour:
@@ -296,9 +296,11 @@ MonoBehaviour:
   - {fileID: 2349809130359384499, guid: 4c0f7a54515467244bc934a45a18a27b, type: 3}
   - {fileID: 2039417041303211149, guid: ae49a4de0c3919e40a627f364400074a, type: 3}
   - {fileID: 6250853078986487886, guid: 6e12c5815ac5a2c4ab48f0e2738c2d86, type: 3}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 32823
+  obstecle:
+  - {fileID: 1212374317534685906, guid: 18911b47f040dff49a7f96b1e95b5a0b, type: 3}
+  - {fileID: 3672126287620322424, guid: 208ebad34cfb6ca478a004fd70c7d04d, type: 3}
+  - {fileID: 635640833755522211, guid: 18f75ac4811dd0741a3c3d568f176616, type: 3}
+  - {fileID: 2132986567053694554, guid: b87393abfb9382d4889a21dc3e5934ff, type: 3}
 --- !u!1 &261594526
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,16 +495,20 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 910222580}
-  m_Layer: 5
-  m_Name: Board
-  m_TagString: Untagged
+  - component: {fileID: 794429068}
+  - component: {fileID: 794429067}
+  - component: {fileID: 794429066}
+  - component: {fileID: 794429065}
+  - component: {fileID: 794429069}
+  m_Layer: 0
+  m_Name: Cleaner
+  m_TagString: Destroy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &910222580
-RectTransform:
+--- !u!65 &794429065
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1428,9 +1434,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 8099169891821143948, guid: 97fc54b7d5826ae4c806dfdfb0a63d11, type: 3}
-      propertyPath: m_Center.y
-      value: 1
+    - target: {fileID: 4634393071835262496, guid: 97fc54b7d5826ae4c806dfdfb0a63d11, type: 3}
+      propertyPath: initialSpeed
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1816,3 +1822,4 @@ SceneRoots:
   - {fileID: 240096645}
   - {fileID: 261594529}
   - {fileID: 1732017054}
+  - {fileID: 794429068}

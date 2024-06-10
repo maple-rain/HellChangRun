@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5160520370162747076}
   - component: {fileID: 5740602923329461191}
   - component: {fileID: -5809541418783620377}
+  - component: {fileID: 835305484072109172}
   m_Layer: 0
   m_Name: cake
   m_TagString: Untagged
@@ -51,10 +52,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 825573ec47e9a3e46ac11b83cf0ccf06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapItemScriptableObject: {fileID: 11400000, guid: 787552658ab27214989349edb6cd85c4, type: 2}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 55
 --- !u!54 &-5809541418783620377
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -82,6 +79,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 94
   m_CollisionDetection: 0
+--- !u!65 &835305484072109172
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796047347388167173}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2384957503363014796
 GameObject:
   m_ObjectHideFlags: 0
