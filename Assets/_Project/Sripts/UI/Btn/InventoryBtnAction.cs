@@ -8,6 +8,10 @@ public class InventoryBtnAction : MonoBehaviour
     public GameObject start;
     public GameObject QuickSlot;
     public GameObject QuickSlotClose;
+    private void Start()
+    {
+        QuickSlot.SetActive(false);
+    }
     public void OpenItemInfo()
     {
         Iteminfo.SetActive(true);

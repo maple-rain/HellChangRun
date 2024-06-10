@@ -1,10 +1,20 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StartButtonAction : MonoBehaviour
 {
     public GameObject shop;
     public GameObject start;
     public GameObject Inventroy;
+
+    private void Awake()
+    {
+        Inventroy.SetActive(true);
+    }
+    private void Start()
+    {
+        Inventroy.SetActive(false);
+    }
     public void OpenShop()
     {
         shop.SetActive(true);
@@ -19,5 +29,10 @@ public class StartButtonAction : MonoBehaviour
     {
         start.SetActive(false);
         Inventroy.SetActive(true);
+    }
+    
+    public void StartBtn()
+    {
+        SceneManager.LoadScene(2);
     }
 }

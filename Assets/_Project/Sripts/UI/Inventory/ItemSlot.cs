@@ -16,7 +16,7 @@ public class ItemSlot : MonoBehaviour
     public Button EquipBtn;
     public GameObject itemInfo;
     public Image icon;
-    public int slotIndex;
+    
 
     public TextMeshProUGUI itemNameText;
     public TextMeshProUGUI itemDescriptionText;
@@ -28,12 +28,8 @@ public class ItemSlot : MonoBehaviour
 
     private void Start()
     {
-        if (inventory != null)
-        {
-            quickSlot = inventory.GetQuickSlot(slotIndex);
-        }
         itemInfoButton.onClick.AddListener(UpdateItemUI);
-        quantity = 0;
+
     }
     public void UpdateItemUI()
     {
@@ -52,20 +48,17 @@ public class ItemSlot : MonoBehaviour
                 ItemStatName.text += itemData.coumsumables[i].type.ToString() + "\n";
                 ItemStatValue.text += itemData.coumsumables[i].value.ToString() + "\n";
             }
-            //EquipBtn.onClick.AddListener(Quickregistration);
-            Debug.Log(this);
-            QucikSlotUpdate();
-            
+            inventory.seletedItem = this;
+            Debug.Log("보여지는것 "+quatityText.text);
+            Debug.Log(quantity);
+
         }
-    }
-    public void QucikSlotUpdate()
-    {
-        quickSlot.SetSlot(this);
     }
     public void Set()
     {
         icon.sprite = itemData.itemIcon;
-        quatityText.text = quantity > 1 ? quantity.ToString() : string.Empty;
+        quatityText.text = quantity >= 1 ? quantity.ToString() : string.Empty;
+        Debug.Log(quantity.ToString());
     }
 
     public void Clear()
@@ -77,46 +70,5 @@ public class ItemSlot : MonoBehaviour
     public void ItemInfoOpen()
     {
         itemInfo.SetActive(true);
-        inventory.SetItem(index);
     }
-
-    #region 퀵슬롯 
-    //public void Quickregistration()
-    //{
-    //    QuickSlot emptySlot = GetItemEmpty();
-    //    if (emptySlot != null)
-    //    {
-    //        emptySlot.itemData = itemData;
-    //        emptySlot.quantity = quantity;
-    //        Debug.Log($"두번째 {emptySlot.itemData}");
-    //        UpdateUI();
-    //        return;
-    //    }
-    //}
-    //private void UpdateUI()
-    //{
-    //    for (int i = 0; i < inventory.QuickSlots.Length; i++)
-    //    {
-    //        if (inventory.QuickSlots[i].itemData != null)
-    //        {
-    //            inventory.QuickSlots[i].Set();
-    //        }
-    //        else
-    //        {
-    //            inventory.QuickSlots[i].Clear();
-    //        }
-    //    }
-    //}
-    //private QuickSlot GetItemEmpty()
-    //{
-    //    for (int i = 0; i < inventory.QuickSlots.Length; i++)
-    //    {
-    //        if (inventory.QuickSlots[i].itemData == null)
-    //        {
-    //            return inventory.QuickSlots[i];
-    //        }
-    //    }
-    //    return null;
-    //}
-    #endregion
 }

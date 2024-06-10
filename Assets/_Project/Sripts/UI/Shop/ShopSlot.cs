@@ -71,6 +71,7 @@ public class ShopSlot : MonoBehaviour
         {
             emptySlot.itemData = itemData;
             emptySlot.quantity = 1;
+            Debug.Log(emptySlot.quantity);
             UpdateUI();
             itemInfo.SetActive(false);
             return;
@@ -87,7 +88,7 @@ public class ShopSlot : MonoBehaviour
         {
             if (Inventory.InvenSlot[i].itemData != null)
             {
-                Inventory.InvenSlot[i].Set();
+                Inventory.InvenSlot[i].Set();                           
             }
             else
             {

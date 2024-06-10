@@ -1,5 +1,3 @@
-using System;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,70 +6,27 @@ public class UIInventory : MonoBehaviour
     [Header("Slot")]
     public ItemSlot[] InvenSlot;
     public Transform InvenSlotHolder;
-
     public QuickSlot[] QuickSlots;
     public Transform QuickSlotsHolder;
-
     Inventory inven;
-
-    //[Header("Select Item")]
-    //public TextMeshProUGUI ItemName;
-    //public TextMeshProUGUI ItemDescription;
-    //public TextMeshProUGUI ItemStatName;
-    //public TextMeshProUGUI ItemStatValue;
+    public ItemSlot seletedItem;
     public Image ItemIcon;
-
-
-    public void Start()
+    public void Awake()
     {
         inven = ItemManager.Instance.Inventory;
         InvenSlot = GetComponentsInChildren<ItemSlot>();
-        for(int i  = 0; i < InvenSlot.Length; i++)
+        for (int i = 0; i < InvenSlot.Length; i++)
         {
             InvenSlot[i].index = i;
             InvenSlot[i].inventory = this;
         }
-
         QuickSlots = GetComponentsInChildren<QuickSlot>();
         for (int i = 0; i < QuickSlots.Length; i++)
         {
             QuickSlots[i].index = i;
             QuickSlots[i].inventory = this;
         }
-
-
-        //for (int i = 0; i < InvenSlot.Length; i++)
-        //{
-        //    int index = i; 
-        //    InvenSlot[i].GetComponent<Button>().onClick.AddListener(() => OnItemSlotClick(index));
-        //}
-        //ClearItemUI();
-        //inven.onSlotCountChange += slotChange;
     }
-    public QuickSlot GetQuickSlot(int index)
-    {
-        if (index >= 0 && index < QuickSlots.Length)
-        {
-            return QuickSlots[index];
-        }
-        return null;
-    }
-
-    //void OnItemSlotClick(int index)
-    //{
-    //    Debug.Log($"{index}번째 클릭  ");
-
-    //    // Assign the clicked slot to an empty quick slot
-    //    for (int i = 0; i < QuickSlots.Length; i++)
-    //    {
-    //        if (QuickSlots[i].itemData == null)
-    //        {
-    //            QuickSlots[i].SetSlot(InvenSlot[index]);
-    //            break;
-    //        }
-    //    }
-    //}
-
     #region 인벤토리슬롯 추가
     private void slotChange(int val)
     {
@@ -87,23 +42,34 @@ public class UIInventory : MonoBehaviour
             }
         }
     }
-
     public void AddSlot()
     {
         inven.SlotCount++;
     }
     #endregion
 
-    //void ClearItemUI()
-    //{
-    //    ItemName.text = string.Empty;
-    //    ItemDescription.text = string.Empty;
-    //    ItemStatName.text = string.Empty;
-    //    ItemStatValue.text = string.Empty;
-    //}
-
-    public void SetItem(int index)
+    #region 퀵슬롯 아이템
+    public void Quickregistration(int index)
     {
-
+        QuickSlot selectedSlot = QuickSlots[index];
+        selectedSlot.itemData = seletedItem.itemData;
+        selectedSlot.quantity = seletedItem.quantity;
+        selectedSlot.icon.sprite = seletedItem.itemData.itemIcon;
+        UpdateUI();
     }
+    private void UpdateUI()
+    {
+        for (int i = 0; i < QuickSlots.Length; i++)
+        {
+            if (QuickSlots[i].itemData != null)
+            {
+                QuickSlots[i].Set();
+            }
+            else
+            {
+                QuickSlots[i].Clear();
+            }
+        }
+    }
+    #endregion
 }
