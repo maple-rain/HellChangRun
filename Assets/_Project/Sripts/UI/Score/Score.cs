@@ -7,8 +7,12 @@ public class Score : MonoBehaviour
 {
     [SerializeField]
     private TMP_Text scoreText;
+
+    private float time;
     void Update()
     {
-        scoreText.text = Time.deltaTime.ToString();
+        
+        time += Time.deltaTime;
+        scoreText.text = time.ToString("N0");
     }
 }
