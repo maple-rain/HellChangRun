@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -5809541418783620377}
   - component: {fileID: -7871170284320123938}
   - component: {fileID: 5468493386688764391}
+  - component: {fileID: 6408983571838894144}
   m_Layer: 0
   m_Name: cake
   m_TagString: Untagged
@@ -117,6 +118,19 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.4
   m_Center: {x: 0, y: 0.1, z: 0}
+--- !u!114 &6408983571838894144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796047347388167173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8ac309a68121c94b928b832d44817f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gainWeight: 0.5
 --- !u!1 &2384957503363014796
 GameObject:
   m_ObjectHideFlags: 0

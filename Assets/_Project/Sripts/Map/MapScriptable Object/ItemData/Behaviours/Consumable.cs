@@ -15,7 +15,7 @@ public class Consumable : MonoBehaviour
 
         if(player != null)
         {
-            //consumableBehaviour.OnConsumed(player.gameObject);
+            consumableBehaviour.OnConsumed(player.gameObject);
             Destroy(gameObject);
         }
     }

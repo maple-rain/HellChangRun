@@ -12,13 +12,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask groundLayer;
 
     [Header("Movement Settings")]
-    [SerializeField] float initialSpeed = 6f;
-    //[SerializeField] float maximumSpeed = 30f;
-    //[SerializeField] float playerSpeedIncreaseRate = 0.1f;
-    //[SerializeField] float playerSpeedDecreaseRate = -0.1f;
+    [SerializeField] float initialSpeed = 16f;
+    [SerializeField] public float currentSpeed;
+    [SerializeField] public float maximumSpeed = 16f;
+    [SerializeField] float playerSpeedIncreaseRate = 0.1f;
+    [SerializeField] float playerSpeedDecreaseRate = -0.1f;
+
     [Header("Jump Settings")]
-    [SerializeField] float jumpForce = 15f;
-    [SerializeField] float doubleJumpForce = 20f;
+    [SerializeField] public float jumpForce = 15f;
+    [SerializeField] public float doubleJumpForce = 20f;
     [SerializeField] float jumpDuration = 0.5f;
     [SerializeField] float jumpCooldown = 0f;
     [SerializeField] float gravityMultiplier = 3f;
@@ -40,7 +42,6 @@ public class PlayerController : MonoBehaviour
     Vector3 moveVector = Vector3.zero;
     bool isSwitching;
     const float ZeroF = 0f;
-    float currentSpeed;
     float velocity;
     float jumpVelocity;
 
@@ -128,7 +129,7 @@ public class PlayerController : MonoBehaviour
         {
             numberOfJumps = 0;
         }
-        Debug.Log(numberOfJumps);
+        Debug.Log(currentSpeed);
     }
     
     private void FixedUpdate()
@@ -267,7 +268,19 @@ public class PlayerController : MonoBehaviour
 
     public void HandleMove()
     {
-        characterController.Move(transform.forward * initialSpeed * Time.deltaTime);
+        characterController.Move(transform.forward * currentSpeed * Time.deltaTime);
+    }
+
+    public void IncreaseSpeed(float speedChangeRate)
+    {
+        Debug.Log("Enter.IncreaseSpeed");
+        currentSpeed += speedChangeRate;
+    }
+
+    public void DecreaseSpeed(float speedChangeRate)
+    {
+        Debug.Log("Enter.DecreaseSpeed");
+        currentSpeed -= speedChangeRate;
     }
 
     public void HandleJump()

@@ -760,6 +760,7 @@ GameObject:
   - component: {fileID: 5391963071065858925}
   - component: {fileID: -3643856245729074351}
   - component: {fileID: 2773809835875123593}
+  - component: {fileID: -7393443274143707071}
   m_Layer: 0
   m_Name: burgerDouble
   m_TagString: Untagged
@@ -868,6 +869,19 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.2
   m_Center: {x: 0, y: 0.2, z: 0}
+--- !u!114 &-7393443274143707071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7343487203986717441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8ac309a68121c94b928b832d44817f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gainWeight: 0.5
 --- !u!1 &8049750010599363384
 GameObject:
   m_ObjectHideFlags: 0
