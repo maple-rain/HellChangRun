@@ -3,7 +3,6 @@
 public class Consumable : MonoBehaviour
 {
     private IConsumableBehaviour consumableBehaviour;
-
     private void Awake()
     {
         consumableBehaviour = GetComponent<IConsumableBehaviour>();

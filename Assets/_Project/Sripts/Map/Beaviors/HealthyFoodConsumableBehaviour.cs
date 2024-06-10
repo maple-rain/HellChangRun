@@ -8,6 +8,6 @@ public class HealthyFoodConsumableBehaviour : MonoBehaviour, IConsumableBehaviou
 
     public void OnConsumed(GameObject player)
     {
-        player.GetComponentInChildren<WeightController>().Consume(loseWeight);
+        player.GetComponent<WeightController>().Consume(loseWeight);
     }
 }
