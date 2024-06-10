@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Windows;
 
 public class PlayerController : MonoBehaviour
 {
@@ -50,7 +51,7 @@ public class PlayerController : MonoBehaviour
     StateMachine stateMachine;
 
     public GameObject QuickSlot;
-    public bool Inventory;
+    public bool toggleInven;
     private void Awake()
     {
         capsuleCollider = GetComponent<CapsuleCollider>();
@@ -208,39 +209,57 @@ public class PlayerController : MonoBehaviour
         if(Inventory)
         {
             QuickSlot.SetActive(true);
-            Inventory = true;
+            toggleInven = true;
+            
         }
         else
         {
             QuickSlot.SetActive(false);
-            Inventory = false;
+            toggleInven = false;
         }
     }
     private void OnItemUse(int Input)
     {
-        if (Inventory)
+        Debug.Log(toggleInven);
+        Debug.Log(ItemManager.Instance.SelectedItemDates[Input]);
+        //인벤토리가 켜지고, 데이터가 있을 때 => 해당 데이터의 value값을 플레이어에게 적용한다
+        if (toggleInven && ItemManager.Instance.SelectedItemDates[Input] != null)
         {
-            
+            ItemData selectedItem = ItemManager.Instance.SelectedItemDates[Input];
+            foreach (ItemDataConsumable consumable in selectedItem.coumsumables)
             {
-                switch (Input)
+                // 소비 가능한 아이템의 효과를 적용합니다.
+                switch (consumable.type)
                 {
-                    case 1:
-                        Debug.Log("Q");
+                    case ConsumableType.Weight:
+                        ApplyWeightConsumable(consumable.value);
                         break;
-                    case 2:
-                        Debug.Log("W");
-
+                    case ConsumableType.Speed:
+                        ApplySpeedConsumable(consumable.value);
                         break;
-                    case 3:
-                        Debug.Log("E");
-                        break;
-                    case 4:
-                        Debug.Log("R");
+                    case ConsumableType.trap:
+                        ApplyTrapConsumable(consumable.value);
                         break;
                 }
             }
-            
         }
+    }
+    private void ApplyWeightConsumable(float value)
+    {
+        // 플레이어에게 무게 소비 가능 효과를 적용합니다.
+        Debug.Log("무게 소비 가능을 적용합니다. 값: " + value);
+    }
+
+    private void ApplySpeedConsumable(float value)
+    {
+        // 플레이어에게 속도 소비 가능 효과를 적용합니다.
+        Debug.Log("속도 소비 가능을 적용합니다. 값: " + value);
+    }
+
+    private void ApplyTrapConsumable(float value)
+    {
+        // 플레이어에게 함정 소비 가능 효과를 적용합니다.
+        Debug.Log("함정 소비 가능을 적용합니다. 값: " + value);
     }
 
 

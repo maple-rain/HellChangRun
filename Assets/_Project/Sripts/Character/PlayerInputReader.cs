@@ -99,7 +99,7 @@ public class PlayerInputReader : ScriptableObject, PlayerInputActions.IPlayerAct
     {
         if (context.phase == InputActionPhase.Started)
         {
-            Inventory.Invoke(toggle()); ;
+            Inventory.Invoke(toggle());
         }
     }
     public bool toggle()
@@ -117,16 +117,16 @@ public class PlayerInputReader : ScriptableObject, PlayerInputActions.IPlayerAct
             switch (keyPressed)
             {
                 case "Q":
-                    ItemUse(1);
+                    ItemUse(0);
                     break;
                 case "W":
-                    ItemUse(2);
+                    ItemUse(1);
                     break;
                 case "E":
-                    ItemUse(3);
+                    ItemUse(2);
                     break;
                 case "R":
-                    ItemUse(4);
+                    ItemUse(3);
                     break;
             }
         }
