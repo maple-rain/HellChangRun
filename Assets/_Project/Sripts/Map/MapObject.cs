@@ -7,7 +7,6 @@ public class MapObject : MonoBehaviour
     [SerializeField]
     private GameObject[] food;
 
-    public LayerMask layerMask;
 
     public void SpanwFood(Vector3 vec)
     {

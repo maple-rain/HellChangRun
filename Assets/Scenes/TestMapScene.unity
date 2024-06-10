@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 240096646}
   - component: {fileID: 240096647}
   - component: {fileID: 240096650}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Map
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -225,7 +225,7 @@ MonoBehaviour:
   - {fileID: 6250853078986487886, guid: 6e12c5815ac5a2c4ab48f0e2738c2d86, type: 3}
   layerMask:
     serializedVersion: 2
-    m_Bits: 32823
+    m_Bits: 4294967295
 --- !u!1 &261594526
 GameObject:
   m_ObjectHideFlags: 0

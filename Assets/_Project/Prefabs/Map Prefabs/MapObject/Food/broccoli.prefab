@@ -101,7 +101,7 @@ MonoBehaviour:
   mapItemScriptableObject: {fileID: 11400000, guid: a86c0129ea26c5a4d81b8c487ea4c9d8, type: 2}
   layerMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 64
 --- !u!54 &177654127162137459
 Rigidbody:
   m_ObjectHideFlags: 0

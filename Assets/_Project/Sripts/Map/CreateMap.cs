@@ -47,7 +47,7 @@ public class CreateMap : MonoBehaviour
         mapObject = GameManager.Instance.mapManager.mapObject;
         StartCoroutine(RespawnMap());
         StartCoroutine(SpawnSide());
-        StartCoroutine(SapwnFood());
+        StartCoroutine(SpawnFood());
     }
 
     IEnumerator RespawnMap()
@@ -71,7 +71,7 @@ public class CreateMap : MonoBehaviour
         {
                    
             GameObject side = sideMapPartsList.Dequeue();
-            setPosition(side , playerTransform.transform.position.y * 3);
+            
             side.SetActive(true);
             for (int i = 0; i < side.transform.childCount; i++)
             {   
@@ -92,11 +92,10 @@ public class CreateMap : MonoBehaviour
             }
             sideMapPartsList.Enqueue(side);
             yield return new WaitForSeconds(3f);
-            side.SetActive(false);
         }
     }
 
-    IEnumerator SapwnFood()
+    IEnumerator SpawnFood()
     {
         while (true)
         {
@@ -118,7 +117,7 @@ public class CreateMap : MonoBehaviour
     private void setPosition(GameObject obj , float i)
     {
         Vector3 newPosition = new Vector3(obj.transform.position.x ,0,playerTransform.position.z);
-        newPosition.z += 21 * i; 
+        newPosition.z += 7 * i; 
         obj.transform.position = newPosition;
     }   
 }

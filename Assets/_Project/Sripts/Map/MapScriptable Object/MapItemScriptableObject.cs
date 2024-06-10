@@ -20,6 +20,7 @@ public enum MapItemFoodType
     HealthFood,
     JunkFood
 }
+
 [CreateAssetMenu(fileName = "MapItem", menuName = "MapItem/Default")]
 public class MapItemScriptableObject : ScriptableObject
 {

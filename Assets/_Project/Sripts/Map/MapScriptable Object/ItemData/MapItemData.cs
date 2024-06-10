@@ -14,7 +14,7 @@ public class MapItemData : MonoBehaviour
         Ray ray = new Ray(transform.position + (-transform.forward * 0.2f) + (transform.up * 0.01f), Vector3.down);
 
         // 레이가 레이어 마스크와 충돌하지 않으면 현재 오브젝트를 삭제
-        if (!Physics.Raycast(ray, out RaycastHit hit, 1f, layerMask))
+        if (!Physics.Raycast(ray, out RaycastHit hit, 5f, layerMask))
         {
             Destroy(gameObject);
         }
