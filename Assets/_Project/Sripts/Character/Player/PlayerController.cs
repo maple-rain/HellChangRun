@@ -28,7 +28,6 @@ public class PlayerController : MonoBehaviour
     [Header("Sliding Settings")]
     [SerializeField] float slideDuration = 0.5f;
     [SerializeField] float slideCoolDown = 0.5f;
-    [SerializeField] AnimationClip slideAnimationClip;
     private bool sliding = false;
     
 
@@ -206,7 +205,8 @@ public class PlayerController : MonoBehaviour
     {
         if(performed && IsGrounded() && !slideTimer.IsRunning)
         {
-            slideTimer.Start();           
+            slideTimer.Start();
+            StartCoroutine(Slide());
         }
         else if(!performed && slideTimer.IsRunning)
         {
@@ -311,7 +311,7 @@ public class PlayerController : MonoBehaviour
 
         sliding = true;
 
-        yield return new WaitForSeconds(slideAnimationClip.length);
+        yield return new WaitForSeconds(0.5f);
 
         characterController.height *= 2;
         characterController.center = originalControllerCenter;
