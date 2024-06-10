@@ -43,8 +43,8 @@ public class WeightController : MonoBehaviour
     {
         playerScale = weight_bar.value * 0.05f;
         playerModel.transform.localScale = new Vector3(playerScale, 0.025f, 0.025f);
-        Debug.Log(weight_bar.value);
-        Debug.Log(player.initialSpeed);
+        //Debug.Log(weight_bar.value);
+        //Debug.Log(player.initialSpeed);
 
         if (weight_bar.value > 0.5f)
         {

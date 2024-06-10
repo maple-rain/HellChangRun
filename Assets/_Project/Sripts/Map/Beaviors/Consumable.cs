@@ -16,6 +16,7 @@ public class Consumable : MonoBehaviour
         if(player != null)
         {
             consumableBehaviour.OnConsumed(player.gameObject);
+            SfxManager.Instance.PlayEatSound();
             Destroy(gameObject);
         }
     }
