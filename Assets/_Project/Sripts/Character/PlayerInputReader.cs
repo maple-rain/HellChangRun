@@ -13,10 +13,12 @@ public class PlayerInputReader : ScriptableObject, PlayerInputActions.IPlayerAct
     public event UnityAction<bool> DoubleJump = delegate { };
     public event UnityAction<bool> Slide = delegate { };
     public event UnityAction<int> UseItem = delegate { };
+    public event UnityAction<bool> Inventory = delegate { };
 
     PlayerInputActions inputActions;
 
     public float Direction => inputActions.Player.Move.ReadValue<float>();
+    public float _useItem => inputActions.Player.ItemUse.ReadValue<float>();
 
     void OnEnable()
     {
@@ -89,5 +91,29 @@ public class PlayerInputReader : ScriptableObject, PlayerInputActions.IPlayerAct
         {
             Slide.Invoke(true);
         }       
+    }
+
+    public void OnInventory(InputAction.CallbackContext context)
+    {
+        switch (context.phase)
+        {
+            case InputActionPhase.Started:
+                Inventory.Invoke(true);
+                break;
+            case InputActionPhase.Canceled:
+                Inventory.Invoke(false);
+                break;
+        }
+    }
+
+    public void OnItemUse(InputAction.CallbackContext context)
+    {
+        switch (context.phase)
+        {
+            case InputActionPhase.Started:
+                break;
+            case InputActionPhase.Canceled:
+                break;
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 internal class ItemManager: Singleton<ItemManager>
 {
@@ -14,4 +15,6 @@ internal class ItemManager: Singleton<ItemManager>
         get { return _inventory; }
         set { _inventory = value; }
     }
+
+    public ItemData[] SelectedItemDates = new ItemData[4];
 }
