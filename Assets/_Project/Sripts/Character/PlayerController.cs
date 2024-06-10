@@ -332,7 +332,7 @@ public class PlayerController : MonoBehaviour
         characterController.center = originalControllerCenter;
         sliding = false;
     }
-    private bool IsGrounded(float length = 0.5f)
+    private bool IsGrounded(float length = 0.7f)
     {
         Vector3 raycastOriginFirst = transform.position;
         raycastOriginFirst.y -= capsuleCollider.height / 2f;
