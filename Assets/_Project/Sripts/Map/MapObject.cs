@@ -15,5 +15,4 @@ public class MapObject : MonoBehaviour
         Eat.transform.position = vec;
     }
 
-    
 }
