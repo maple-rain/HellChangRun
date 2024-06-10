@@ -12195,7 +12195,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InvenSlot: []
   InvenSlotHolder: {fileID: 1046905410}
-  QuickSlots: []
+  QuickSlots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   QuickSlotsHolder: {fileID: 887223839}
   seletedItem: {fileID: 0}
   ItemIcon: {fileID: 1439964906}
