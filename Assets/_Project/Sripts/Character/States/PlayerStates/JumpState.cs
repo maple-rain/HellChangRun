@@ -11,6 +11,7 @@ public class JumpState : BaseState
 
     public override void OnEnter()
     {
+        SfxManager.Instance.PlayJumpSound();
         Debug.Log("JumpState.OnEnter");
         animator.CrossFade(JumpHash, crossFadeDuration);
     }
@@ -20,5 +21,6 @@ public class JumpState : BaseState
         //플레이어 점프와 움직임 로직 호출
         player.HandleJump();
         player.HandleMove();
+        
     }
 }

@@ -12,16 +12,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask groundLayer;
 
     [Header("Movement Settings")]
-    
     public float initialSpeed = 16f;
-    [SerializeField] public float currentSpeed;
-    [SerializeField] public float maximumSpeed = 16f;
-    [SerializeField] float playerSpeedIncreaseRate = 0.1f;
-    [SerializeField] float playerSpeedDecreaseRate = -0.1f;
 
-    //[SerializeField] float maximumSpeed = 30f;
-    //[SerializeField] float playerSpeedIncreaseRate = 0.1f;
-    //[SerializeField] float playerSpeedDecreaseRate = -0.1f;
     [Header("Jump Settings")]
     [SerializeField] float jumpForce = 15f;
     [SerializeField] float doubleJumpForce = 20f;
@@ -56,6 +48,8 @@ public class PlayerController : MonoBehaviour
     CountdownTimer slideCooldownTimer;
     CharacterController characterController;
     StateMachine stateMachine;
+
+    public GameObject QuickSlot;
 
     private void Awake()
     {
@@ -114,7 +108,9 @@ public class PlayerController : MonoBehaviour
         playerInputReader.Jump += OnJump;
         playerInputReader.DoubleJump += OnDoubleJump;
         playerInputReader.Slide += OnSlide;
+        playerInputReader.Inventory += OnInventory;
     }
+
 
     private void OnDisable()
     {
@@ -122,6 +118,7 @@ public class PlayerController : MonoBehaviour
         playerInputReader.Jump -= OnJump;
         playerInputReader.DoubleJump -= OnDoubleJump;
         playerInputReader.Slide -= OnSlide;
+        playerInputReader.Inventory -= OnInventory;
     }
 
     private void Update()
@@ -205,6 +202,17 @@ public class PlayerController : MonoBehaviour
         }
         isSwitching = false;
     }
+    private void OnInventory(bool Inventory)
+    {
+        if(Inventory)
+        {
+            QuickSlot.SetActive(true);
+        }
+        else
+        {
+            QuickSlot.SetActive(false);
+        }
+    }
 
     public void OnSlide(bool performed)
     {
@@ -230,17 +238,6 @@ public class PlayerController : MonoBehaviour
             currentLane = 1;
             return;
         }
-    }
-    public void IncreaseSpeed(float speedChangeRate)
-    {
-        Debug.Log("Enter.IncreaseSpeed");
-        currentSpeed += speedChangeRate;
-    }
-
-    public void DecreaseSpeed(float speedChangeRate)
-    {
-        Debug.Log("Enter.DecreaseSpeed");
-        currentSpeed -= speedChangeRate;
     }
 
     private IEnumerator SmoothMove(Vector3 targetPosition) 

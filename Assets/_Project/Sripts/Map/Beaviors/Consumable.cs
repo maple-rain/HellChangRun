@@ -3,7 +3,6 @@
 public class Consumable : MonoBehaviour
 {
     private IConsumableBehaviour consumableBehaviour;
-
     private void Awake()
     {
         consumableBehaviour = GetComponent<IConsumableBehaviour>();
@@ -16,6 +15,7 @@ public class Consumable : MonoBehaviour
         if(player != null)
         {
             consumableBehaviour.OnConsumed(player.gameObject);
+            SfxManager.Instance.PlayEatSound();
             Destroy(gameObject);
         }
     }

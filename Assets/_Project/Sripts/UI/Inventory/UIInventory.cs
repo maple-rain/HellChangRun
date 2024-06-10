@@ -58,7 +58,9 @@ public class UIInventory : MonoBehaviour
         selectedSlot.itemData = seletedItem.itemData;
         selectedSlot.quantity = seletedItem.quantity;
         selectedSlot.icon.sprite = seletedItem.itemData.itemIcon;
+        ItemManager.Instance.SelectedItemDates[index] = seletedItem.itemData; 
         UpdateUI();
+
     }
     private void UpdateUI()
     {

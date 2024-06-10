@@ -8,6 +8,6 @@ public class JunkFoodConsumableBehaviour : MonoBehaviour, IConsumableBehaviour
 
     public void OnConsumed(GameObject player)
     {
-        player.GetComponentInChildren<WeightController>().JunkConsume(gainWeight);
+        player.GetComponent<WeightController>().JunkConsume(gainWeight);
     }
 }
