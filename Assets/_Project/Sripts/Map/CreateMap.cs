@@ -21,6 +21,8 @@ public class CreateMap : MonoBehaviour
     private SideMapObject sideMapObject;
     private MapObject mapObject;
 
+
+
     private void Awake()
     {
         for (int i = 0; i < mapPartsCount; i++)
@@ -48,13 +50,14 @@ public class CreateMap : MonoBehaviour
         StartCoroutine(RespawnMap());
         StartCoroutine(SpawnSide());
         StartCoroutine(SpawnFood());
+        StartCoroutine(SpawnObstecle());
     }
 
     IEnumerator RespawnMap()
     {
         while (true)
         {
-            for (int i = -1; i < 2; i++)
+            for (int i = -1; i < 10; i++)
             {
                 GameObject map = mapPartsList.Dequeue();
                 setPosition(map, i);
@@ -67,11 +70,10 @@ public class CreateMap : MonoBehaviour
 
     IEnumerator SpawnSide()
     {
+        int j = 0;
         while (true)
-        {
-                   
+        {                  
             GameObject side = sideMapPartsList.Dequeue();
-            
             side.SetActive(true);
             for (int i = 0; i < side.transform.childCount; i++)
             {   
@@ -81,17 +83,18 @@ public class CreateMap : MonoBehaviour
                 {
                     sideMapObject.DeploymentObject(obj,true);
                     sideMapObject.RerollSide(obj);
-                    setPosition(obj, i);
+                    setSidePosition(obj, (i) + j);
                 }
                 else
                 {
                     sideMapObject.DeploymentObject(obj, false);
                     sideMapObject.RerollSide(obj);
-                    setPosition(obj, i-1);
+                    setSidePosition(obj, (i-1) + j);
                 }
             }
             sideMapPartsList.Enqueue(side);
-            yield return new WaitForSeconds(3f);
+            j = 5;
+            yield return new WaitForSeconds(7f);
         }
     }
 
@@ -113,6 +116,23 @@ public class CreateMap : MonoBehaviour
         }
     }
 
+    IEnumerator SpawnObstecle()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(5f);
+            Vector3[] randomRoad =
+            {
+                new Vector3(-8f,0f,playerTransform.position.z + 20f),
+                new Vector3(0f,0f,playerTransform.position.z + 20f),
+                new Vector3(8f,0f,playerTransform.position.z + 20f)
+            };
+            int randomSapwn = Random.Range(0, randomRoad.Length);
+            mapObject.SpanwObstecle(randomRoad[randomSapwn]);
+
+        }
+    }
+
 
     private void setPosition(GameObject obj , float i)
     {
@@ -120,4 +140,11 @@ public class CreateMap : MonoBehaviour
         newPosition.z += 21 * i; 
         obj.transform.position = newPosition;
     }   
+
+    private void setSidePosition(GameObject obj, float i)
+    {
+        Vector3 newPosition = new Vector3(obj.transform.position.x, 0, playerTransform.position.z + 20);
+        newPosition.z += 21 * i;
+        obj.transform.position = newPosition;
+    }
 }
