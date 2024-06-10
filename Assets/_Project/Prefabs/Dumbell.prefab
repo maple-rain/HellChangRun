@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 2254587966670904109}
   - component: {fileID: 4083938607463329767}
   - component: {fileID: 6288231344041769049}
+  - component: {fileID: 3827452879433879042}
+  - component: {fileID: 9187659245364586968}
   m_Layer: 0
   m_Name: Dumbell
   m_TagString: Untagged
@@ -29,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -1.992, y: -0.583, z: -8.862}
-  m_LocalScale: {x: 0.6, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.9, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -111,3 +113,36 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 6
   m_CollisionDetection: 0
+--- !u!65 &3827452879433879042
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2570971506439179826}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.2223358, y: 0.70777583, z: 0.81726897}
+  m_Center: {x: -0.0010597706, y: 0.081427395, z: 0.0021264553}
+--- !u!114 &9187659245364586968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2570971506439179826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 098a6a740cf869145be8fa9156ba9336, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

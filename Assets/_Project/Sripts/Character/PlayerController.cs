@@ -351,4 +351,11 @@ public class PlayerController : MonoBehaviour
         }
         return false;
     }
+    public void HandleProjectileHit()
+    {
+        // 플레이어의 z 위치를 -2만큼 이동시킵니다.
+        Vector3 newPosition = transform.position;
+        newPosition.z -= 5f;
+        transform.position = newPosition;
+    }
 }

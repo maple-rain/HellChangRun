@@ -7,11 +7,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] Transform player;
     [SerializeField] Animator animator;
     [SerializeField] GameObject weaponPrefab;
-    [SerializeField] Transform throwPoint;
 
     [Header("Movement Settings")]
     [SerializeField] float catchDistance = 1f;
     [SerializeField] float throwDistance = 5f;
+    [SerializeField] float maxDistance = 10f;
     [SerializeField] float speed = 6f;
 
     private float throwTimer;
@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
     {
         player = FindObjectOfType<PlayerController>().transform;
         transform.position = new Vector3(0.5f, 0.2f, -5f);
-        throwTimer = Random.Range(10f, 15f);
+        throwTimer = Random.Range(6f, 9f);
     }
 
     private void Update()
@@ -35,6 +35,13 @@ public class Enemy : MonoBehaviour
                 throwTimer = Random.Range(4f, 7f); 
             }
         }
+
+        float distance = Vector3.Distance(transform.position, player.position);
+        if (distance > maxDistance)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
+        }
+        
     }
 
     private void FollowPlayer()
@@ -51,15 +58,16 @@ public class Enemy : MonoBehaviour
     private IEnumerator ThrowWeaponAfterAnimation()
     {
         yield return new WaitForSeconds(1.5f);
-        GameObject weapon = Instantiate(weaponPrefab, throwPoint.position, Quaternion.identity);
+        Vector3 weaponPosition = new Vector3(transform.position.x, 4f, transform.position.z);
+        GameObject weapon = Instantiate(weaponPrefab, weaponPosition, transform.rotation);
         Rigidbody weaponRb = weapon.GetComponent<Rigidbody>();
         if (weaponRb != null)
         {
-            weaponRb.velocity = new Vector3(0f, 0f, 25f);
+            weaponRb.velocity = new Vector3(0f, 0f, 35f);
         }
         else
         {
-            Debug.LogError("Weapon prefab does not have a Rigidbody component!");
+            Debug.LogError("Rigidbody Error");
         }
 
         Destroy(weapon, 5f);
