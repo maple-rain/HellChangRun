@@ -1,64 +1,97 @@
-﻿using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.InputSystem.XInput;
-
-public class GuardChase : MonoBehaviour
+﻿using System.Collections;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+public class Enemy : MonoBehaviour
 {
-    public Transform player; 
-    public GameObject projectilePrefab; // 투사체 프리팹
-    public Transform throwPoint; // 투사체가 발사될 위치
-    public float catchDistance = 1.5f; // 잡히는 거리
-    public float throwInterval = 8f; // 투사체를 던지는 간격
-    public float followDistance = 5f; // 보안관이 플레이어를 따라오는 거리
-    public float speed = 10f; // 보안관의 이동 속도
+    [Header("References")]
+    [SerializeField] Transform player;
+    [SerializeField] Animator animator;
+    [SerializeField] GameObject weaponPrefab;
+    [SerializeField] Transform throwPoint;
 
-    private NavMeshAgent navAgent; // NavMeshAgent 
-    private Animator animator; // Animator 
-    private float throwTimer; // 투사체 던지기 타이머
+    [Header("Movement Settings")]
+    [SerializeField] float catchDistance = 1f;
+    [SerializeField] float throwDistance = 5f;
+    [SerializeField] float speed = 6f;
 
-    void Start()
+    private float throwTimer;
+
+    private void Start()
     {
-        navAgent = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
-        throwTimer = throwInterval; // 타이머 초기화
+        player = FindObjectOfType<PlayerController>().transform;
+        transform.position = new Vector3(0.5f, 0f, -5f);
+        throwTimer = Random.Range(10f, 15f);
     }
 
-    void Update()
+    private void Update()
     {
         if (player != null)
         {
-            // 플레이어의 좌우 이동을 따라갑니다.인풋컨트롤러 사용시 주석 해제
-            //Vector3 move = new Vector3(InputController.MoveInput.x, 0, InputController.MoveInput.y) * speed * Time.deltaTime;
-            //navAgent.Move(move);
-            Vector3 followPosition = new Vector3(player.position.x, transform.position.y, player.position.z - followDistance);
-            navAgent.SetDestination(followPosition);
+            FollowPlayer();
 
-
-            // 보안관의 속도에 따라 애니메이션을 조정
-            animator.SetFloat("Speed", navAgent.velocity.magnitude);
-
-            if (Vector3.Distance(transform.position, player.position) <= catchDistance)
+            if (Mathf.Abs(transform.position.z - player.position.z) <= catchDistance)
             {
-                Debug.Log("플레이어 잡힘");
-                // 게임 오버 처리 또는 다른 로직 추가
+                Debug.Log("Game Over!");
+                //SceneManager.LoadScene("GameOverScene");
             }
 
-            // 일정 시간마다 투사체를 던집니다.
+            
             throwTimer -= Time.deltaTime;
             if (throwTimer <= 0f)
             {
-                ThrowProjectile();
-                throwTimer = throwInterval; // 타이머 리셋
+                ThrowWeapon();
+                throwTimer = Random.Range(4f, 7f); 
             }
         }
     }
 
-    void ThrowProjectile()
+    private void FollowPlayer()
     {
-        // 투사체 생성 및 발사
-        GameObject projectile = Instantiate(projectilePrefab, throwPoint.position, throwPoint.rotation);
-        // 투사체에 플레이어를 향해 회전하도록 설정
-        projectile.transform.LookAt(player.position);
-        Debug.Log("덤밸 던짐");
+        transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.position.x, transform.position.y, player.position.z), speed * Time.deltaTime);
+        animator.SetFloat("Moving", speed);
+    }
+    private void ThrowWeapon()
+    {
+        // 무기를 던지는 애니메이션 트리거
+        animator.SetTrigger("ThrowAnimation"); // 정확한 트리거 이름 사용
+
+        // 던지기 애니메이션 시간이 지난 후에 무기를 던짐
+        StartCoroutine(ThrowWeaponAfterAnimation());
+    }
+
+    private IEnumerator ThrowWeaponAfterAnimation()
+    {
+        // 애니메이션 길이만큼 대기
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+
+        // 무기를 생성하고 던짐
+        GameObject weapon = Instantiate(weaponPrefab, throwPoint.position, Quaternion.identity);
+
+        // Rigidbody가 있는지 확인하고, 있으면 속도 설정
+        Rigidbody weaponRb = weapon.GetComponent<Rigidbody>();
+        if (weaponRb != null)
+        {
+            weaponRb.velocity = new Vector3(0f, 0f, 25f);
+        }
+        else
+        {
+            Debug.LogError("Weapon prefab does not have a Rigidbody component!");
+        }
+
+        // 5초 후에 무기 제거
+        Destroy(weapon, 5f);
+
+        // 달리는 상태로 돌아감
+        animator.SetFloat("Moving", speed);
+    }
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Player"))
+        {
+            Debug.Log("Player caught!");
+            //게임 오버
+        }
     }
 }

@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Movement Settings")]
     [SerializeField] float initialSpeed = 6f;
-    //[SerializeField] float maximumSpeed = 30f;
+    //[SerializeField] float maximumSpeed = 30f;a
     //[SerializeField] float playerSpeedIncreaseRate = 0.1f;
     //[SerializeField] float playerSpeedDecreaseRate = -0.1f;
     [Header("Jump Settings")]
