@@ -43,8 +43,6 @@ public class ShopSlot : MonoBehaviour
 
         purchaseButton.onClick.RemoveAllListeners();
         purchaseButton.onClick.AddListener(BuyItem);
-
-
     }
 
 
@@ -62,19 +60,23 @@ public class ShopSlot : MonoBehaviour
             {
                 slot.quantity++;
                 UpdateUI();
+                itemInfo.SetActive(false);
                 return;
             }
         }
+
         ItemSlot emptySlot = GetItemEmpty();
         // ÀÖÀ½?
         if (emptySlot != null)
         {
             emptySlot.itemData = itemData;
             emptySlot.quantity = 1;
+            Debug.Log(emptySlot.quantity);
             UpdateUI();
+            itemInfo.SetActive(false);
             return;
         }
-        
+
         // ¸ø»ï
         NobuyItem();
         itemInfo.SetActive(false);
@@ -86,7 +88,7 @@ public class ShopSlot : MonoBehaviour
         {
             if (Inventory.InvenSlot[i].itemData != null)
             {
-                Inventory.InvenSlot[i].Set();
+                Inventory.InvenSlot[i].Set();                       
             }
             else
             {

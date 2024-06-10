@@ -6,6 +6,7 @@ public class Inventory : MonoBehaviour
     private void Awake()
     {
         ItemManager.Instance.Inventory = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     public delegate void OnSlotCountChange(int val);

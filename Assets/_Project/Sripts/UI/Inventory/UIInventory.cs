@@ -1,5 +1,3 @@
-using System;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,30 +6,29 @@ public class UIInventory : MonoBehaviour
     [Header("Slot")]
     public ItemSlot[] InvenSlot;
     public Transform InvenSlotHolder;
-
+    public QuickSlot[] QuickSlots;
+    public Transform QuickSlotsHolder;
     Inventory inven;
-
-    [Header("Select Item")]
-    public TextMeshProUGUI ItemName;
-    public TextMeshProUGUI ItemDescription;
-    public TextMeshProUGUI ItemStatName;
-    public TextMeshProUGUI ItemStatValue;
+    public ItemSlot seletedItem;
     public Image ItemIcon;
 
-
-    public void Start()
+    public void Awake()
     {
         inven = ItemManager.Instance.Inventory;
         InvenSlot = GetComponentsInChildren<ItemSlot>();
-        for(int i  = 0; i < InvenSlot.Length; i++)
+        for (int i = 0; i < InvenSlot.Length; i++)
         {
             InvenSlot[i].index = i;
             InvenSlot[i].inventory = this;
         }
-        ClearItemUI();
+        QuickSlots = GetComponentsInChildren<QuickSlot>();
+        for (int i = 0; i < QuickSlots.Length; i++)
+        {
+            QuickSlots[i].index = i;
+            QuickSlots[i].inventory = this;
+        }
         //inven.onSlotCountChange += slotChange;
     }
-
     #region ¿Œ∫•≈‰∏ÆΩΩ∑‘ √ﬂ∞°
     private void slotChange(int val)
     {
@@ -46,24 +43,36 @@ public class UIInventory : MonoBehaviour
                 InvenSlot[i].GetComponent<Button>().interactable = false;
             }
         }
+        
     }
-
     public void AddSlot()
     {
         inven.SlotCount++;
     }
     #endregion
 
-    void ClearItemUI()
+    #region ƒ¸ΩΩ∑‘ æ∆¿Ã≈€
+    public void Quickregistration(int index)
     {
-        ItemName.text = string.Empty;
-        ItemDescription.text = string.Empty;
-        ItemStatName.text = string.Empty;
-        ItemStatValue.text = string.Empty;
+        QuickSlot selectedSlot = QuickSlots[index];
+        selectedSlot.itemData = seletedItem.itemData;
+        selectedSlot.quantity = seletedItem.quantity;
+        selectedSlot.icon.sprite = seletedItem.itemData.itemIcon;
+        UpdateUI();
     }
-
-    public void SetItem(int index)
+    private void UpdateUI()
     {
-
+        for (int i = 0; i < QuickSlots.Length; i++)
+        {
+            if (QuickSlots[i].itemData != null)
+            {
+                QuickSlots[i].Set();
+            }
+            else
+            {
+                QuickSlots[i].Clear();
+            }
+        }
     }
+    #endregion
 }

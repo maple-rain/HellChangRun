@@ -28,12 +28,12 @@ public class SideMapObject : MonoBehaviour
         
         if (isLeft)
         {
-            obj.transform.position = new Vector3(-14, 0, 0);
+            obj.transform.position = new Vector3(-22, 0, 0);
             obj.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
         }
         else
         {
-            obj.transform.position = new Vector3(14, 0, 0);
+            obj.transform.position = new Vector3(22, 0, 0);
             obj.transform.rotation = Quaternion.Euler(new Vector3(0, -180, 0));
         }
     }

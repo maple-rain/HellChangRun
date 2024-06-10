@@ -3,13 +3,14 @@ using UnityEngine;
 
 public class InventoryBtnAction : MonoBehaviour
 {
-    public GameObject Equip;
     public GameObject Iteminfo;
     public GameObject Inventory;
     public GameObject start;
-    public void OpenEquip()
+    public GameObject QuickSlot;
+    public GameObject QuickSlotClose;
+    private void Start()
     {
-        Equip.SetActive(true);
+        QuickSlot.SetActive(false);
     }
     public void OpenItemInfo()
     {
@@ -24,4 +25,17 @@ public class InventoryBtnAction : MonoBehaviour
         Inventory.SetActive(false);
         start.SetActive(true);
     }
+    public void OpenQuickSlot()
+    {
+        Iteminfo.SetActive(false);
+        QuickSlot.SetActive(true);
+        QuickSlotClose.SetActive(true);
+    }
+    public void CloseQuickSlot()
+    {
+        Iteminfo.SetActive(true);
+        QuickSlot.SetActive(false);
+        QuickSlotClose.SetActive(false);
+    }
+
 }

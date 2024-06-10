@@ -14,6 +14,7 @@ public class SlideState : BaseState
 
     public override void FixedUpdate()
     {
+        Debug.Log("슬라이딩");
         player.HandleMove();
         player.HandleSlide();
     }
