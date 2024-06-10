@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
     StateMachine stateMachine;
 
     public GameObject QuickSlot;
-
+    public bool Inventory;
     private void Awake()
     {
         capsuleCollider = GetComponent<CapsuleCollider>();
@@ -109,8 +109,8 @@ public class PlayerController : MonoBehaviour
         playerInputReader.DoubleJump += OnDoubleJump;
         playerInputReader.Slide += OnSlide;
         playerInputReader.Inventory += OnInventory;
+        playerInputReader.ItemUse += OnItemUse;
     }
-
 
     private void OnDisable()
     {
@@ -119,6 +119,7 @@ public class PlayerController : MonoBehaviour
         playerInputReader.DoubleJump -= OnDoubleJump;
         playerInputReader.Slide -= OnSlide;
         playerInputReader.Inventory -= OnInventory;
+        playerInputReader.ItemUse -= OnItemUse;
     }
 
     private void Update()
@@ -207,12 +208,41 @@ public class PlayerController : MonoBehaviour
         if(Inventory)
         {
             QuickSlot.SetActive(true);
+            Inventory = true;
         }
         else
         {
             QuickSlot.SetActive(false);
+            Inventory = false;
         }
     }
+    private void OnItemUse(int Input)
+    {
+        if (Inventory)
+        {
+            
+            {
+                switch (Input)
+                {
+                    case 1:
+                        Debug.Log("Q");
+                        break;
+                    case 2:
+                        Debug.Log("W");
+
+                        break;
+                    case 3:
+                        Debug.Log("E");
+                        break;
+                    case 4:
+                        Debug.Log("R");
+                        break;
+                }
+            }
+            
+        }
+    }
+
 
     public void OnSlide(bool performed)
     {
