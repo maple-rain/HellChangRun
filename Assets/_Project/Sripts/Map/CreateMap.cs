@@ -21,7 +21,8 @@ public class CreateMap : MonoBehaviour
     private SideMapObject sideMapObject;
     private MapObject mapObject;
 
-
+    [SerializeField]
+    private PlayerController playerController;
 
     private void Awake()
     {
@@ -45,6 +46,7 @@ public class CreateMap : MonoBehaviour
 
     private void Start()
     {
+        playerController = playerTransform.gameObject.GetComponent<PlayerController>();
         sideMapObject = GameManager.Instance.mapManager.sideMapObject;
         mapObject = GameManager.Instance.mapManager.mapObject;
         StartCoroutine(RespawnMap());
@@ -64,7 +66,7 @@ public class CreateMap : MonoBehaviour
                 map.SetActive(true);
                 mapPartsList.Enqueue(map);      
             }
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(3f);
         }
     }
 
@@ -94,7 +96,7 @@ public class CreateMap : MonoBehaviour
             }
             sideMapPartsList.Enqueue(side);
             j = 5;
-            yield return new WaitForSeconds(7f);
+            yield return new WaitForSeconds(5f);
         }
     }
 
@@ -106,9 +108,9 @@ public class CreateMap : MonoBehaviour
             int randomY = Random.Range(1, 8);
             Vector3[] randomRoad =
             {
-                new Vector3(-8f,randomY,playerTransform.position.z + 20f),
-                new Vector3(0f,randomY,playerTransform.position.z + 20f),
-                new Vector3(8f,randomY,playerTransform.position.z + 20f)
+                new Vector3(-8f,randomY,playerTransform.position.z + 90f),
+                new Vector3(0f,randomY,playerTransform.position.z + 90f),
+                new Vector3(8f,randomY,playerTransform.position.z + 90f)
             };
             int randomSapwn = Random.Range(0,randomRoad.Length);
 
@@ -121,12 +123,12 @@ public class CreateMap : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(3f);
             Vector3[] randomRoad =
             {
-                new Vector3(-8f,0f,playerTransform.position.z + 20f),
-                new Vector3(0f,0f,playerTransform.position.z + 20f),
-                new Vector3(8f,0f,playerTransform.position.z + 20f)
+                new Vector3(-8f,0f,playerTransform.position.z + 90f),
+                new Vector3(0f,0f,playerTransform.position.z + 90f),
+                new Vector3(8f,0f,playerTransform.position.z + 90f)
             };
             int randomSapwn = Random.Range(0, randomRoad.Length);
             mapObject.SpanwObstecle(randomRoad[randomSapwn]);
@@ -148,4 +150,5 @@ public class CreateMap : MonoBehaviour
         newPosition.z += 21 * i;
         obj.transform.position = newPosition;
     }
+
 }

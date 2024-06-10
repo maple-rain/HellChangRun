@@ -10,6 +10,7 @@ public class DoubleJumpState : BaseState
 
     public override void OnEnter()
     {
+        SfxManager.Instance.PlayDoubleJumpSound();
         Debug.Log("DoubleJumpState.OnEnter");
         animator.CrossFade(DoubleJumpHash, crossFadeDuration);
     }
@@ -18,5 +19,6 @@ public class DoubleJumpState : BaseState
         //플레이어 점프와 움직임 로직 호출
         player.HandleJump();
         player.HandleMove();
+
     }
 }

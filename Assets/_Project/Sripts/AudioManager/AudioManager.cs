@@ -1,6 +1,34 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
-internal class AudioManager : MonoBehaviour
+public class AudioManager : Singleton<AudioManager>
 {
+    
 
+    
+
+  
+    
+
+    
+
+    private void Awake()
+    {
+        base.Awake();
+       
+      
+       
+    }
+
+    
+
+   
+
+    
+
+    
+
+    
+
+   
 }
