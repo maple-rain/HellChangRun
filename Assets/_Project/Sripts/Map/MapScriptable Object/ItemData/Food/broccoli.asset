@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d0b50b928bcbbb49b028bd98177ffab, type: 3}
+  m_Name: broccoli
+  m_EditorClassIdentifier: 
+  itemType: 0
+  dropPrefab: {fileID: 4616828600858507039, guid: 665f6592d9f9546459df88f319d4f699, type: 3}
+  foodType: 0
+  value: 0
