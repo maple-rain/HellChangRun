@@ -18,8 +18,6 @@ public class PlayerInputReader : ScriptableObject, PlayerInputActions.IPlayerAct
     PlayerInputActions inputActions;
     public bool isOn= false;
 
-    public bool isOn = false;
-
     public float Direction => inputActions.Player.Move.ReadValue<float>();
  
 

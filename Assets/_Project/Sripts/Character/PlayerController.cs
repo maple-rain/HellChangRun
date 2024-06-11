@@ -54,9 +54,6 @@ public class PlayerController : MonoBehaviour
     CharacterController characterController;
     StateMachine stateMachine;
 
-    public GameObject QuickSlot;
-    public bool toggleInven;
-    public WeightController weightController;
     private void Awake()
     {
         capsuleCollider = GetComponent<CapsuleCollider>();
@@ -228,7 +225,7 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log(toggleInven);
         Debug.Log(ItemManager.Instance.SelectedItemDates[Input]);
-        //�κ��丮�� ������, �����Ͱ� ���� �� => �ش� �������� value���� �÷��̾�� �����Ѵ�
+
         if (toggleInven && ItemManager.Instance.SelectedItemDates[Input] != null)
         {
             ItemData selectedItem = ItemManager.Instance.SelectedItemDates[Input];
@@ -264,49 +261,6 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("������ ���� " + value);
     }
-
-
-    private void OnItemUse(int Input)
-    {
-        Debug.Log(toggleInven);
-        Debug.Log(ItemManager.Instance.SelectedItemDates[Input]);
-        //�κ��丮�� ������, �����Ͱ� ���� �� => �ش� �������� value���� �÷��̾�� �����Ѵ�
-        if (toggleInven && ItemManager.Instance.SelectedItemDates[Input] != null)
-        {
-            ItemData selectedItem = ItemManager.Instance.SelectedItemDates[Input];
-            foreach (ItemDataConsumable consumable in selectedItem.coumsumables)
-            {
-                // �Һ� ������ �������� ȿ���� ����
-                switch (consumable.type)
-                {
-                    case ConsumableType.Weight:
-                        ApplyWeightConsumable(consumable.value);
-                        break;
-                    case ConsumableType.Speed:
-                        ApplySpeedConsumable(consumable.value);
-                        break;
-                    case ConsumableType.trap:
-                        ApplyTrapConsumable(consumable.value);
-                        break;
-                }
-            }
-        }
-    }
-    private void ApplyWeightConsumable(float value)
-    {
-        weightController.Consume(value);
-    }
-
-    private void ApplySpeedConsumable(float value)
-    {
-        initialSpeed += value;
-    }
-
-    private void ApplyTrapConsumable(float value)
-    {
-        Debug.Log("������ ���� " + value);
-    }
-
     public void OnSlide(bool performed)
     {
         if(performed && IsGrounded() && !slideTimer.IsRunning)
