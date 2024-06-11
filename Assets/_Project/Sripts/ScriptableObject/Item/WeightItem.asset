@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: WeightItem
   m_EditorClassIdentifier: 
   itemName: banana
-  Type: 0
-  itemDescription: banana
+  Type: 1
+  itemDescription: LoseWeight
   itemIcon: {fileID: 21300000, guid: 7df44a2de0677c5478689deca08733e9, type: 3}
   itemPrice: 0
   CanStack: 1
   maxStackAmount: 99
   coumsumables:
   - type: 0
-    value: -5
+    value: 5

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Windows;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask groundLayer;
 
     [Header("Movement Settings")]
-    public float initialSpeed = 16f;
+    public float initialSpeed = 10f;
 
     [Header("Jump Settings")]
     [SerializeField] float jumpForce = 15f;
@@ -53,10 +54,14 @@ public class PlayerController : MonoBehaviour
     CharacterController characterController;
     StateMachine stateMachine;
 
+    public GameObject QuickSlot;
+    public bool toggleInven;
+    public WeightController weightController;
     private void Awake()
     {
         capsuleCollider = GetComponent<CapsuleCollider>();
         characterController= GetComponent<CharacterController>();
+        weightController = GetComponent<WeightController>();
         //groundChecker = GetComponent<GroundChecker>();
         SetupTimers();
         SetupStates();
@@ -111,8 +116,8 @@ public class PlayerController : MonoBehaviour
         playerInputReader.DoubleJump += OnDoubleJump;
         playerInputReader.Slide += OnSlide;
         playerInputReader.Inventory += OnInventory;
+        playerInputReader.ItemUse += OnItemUse;
     }
-
 
     private void OnDisable()
     {
@@ -121,6 +126,7 @@ public class PlayerController : MonoBehaviour
         playerInputReader.DoubleJump -= OnDoubleJump;
         playerInputReader.Slide -= OnSlide;
         playerInputReader.Inventory -= OnInventory;
+        playerInputReader.ItemUse -= OnItemUse;
     }
 
     private void Update()
@@ -187,14 +193,14 @@ public class PlayerController : MonoBehaviour
 
        Vector3 targetPosition = characterController.transform.position;
 
-        if (direction == -1 && currentLane >=0 && isSwitching ==false ) //¿ÞÂÊ ¹æÇâÅ°
+        if (direction == -1 && currentLane >=0 && isSwitching ==false ) //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Å°
         {         
             currentLane--;
             targetPosition += Vector3.left * laneDistance;
             
             StartCoroutine(SmoothMove(targetPosition));
         }
-        else if (direction == 1 && currentLane <1 && isSwitching == false) //¿À¸¥ÂÊ ¹æÇâÅ°
+        else if (direction == 1 && currentLane <1 && isSwitching == false) //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Å°
         {
             
             currentLane++;
@@ -210,7 +216,7 @@ public class PlayerController : MonoBehaviour
         {
             QuickSlot.SetActive(true);
             toggleInven = true;
-
+            
         }
         else
         {
@@ -218,18 +224,17 @@ public class PlayerController : MonoBehaviour
             toggleInven = false;
         }
     }
-
     private void OnItemUse(int Input)
     {
         Debug.Log(toggleInven);
         Debug.Log(ItemManager.Instance.SelectedItemDates[Input]);
-        //ÀÎº¥Åä¸®°¡ ÄÑÁö°í, µ¥ÀÌÅÍ°¡ ÀÖÀ» ¶§ => ÇØ´ç µ¥ÀÌÅÍÀÇ value°ªÀ» ÇÃ·¹ÀÌ¾î¿¡°Ô Àû¿ëÇÑ´Ù
+        //ï¿½Îºï¿½ï¿½ä¸®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ => ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ valueï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½
         if (toggleInven && ItemManager.Instance.SelectedItemDates[Input] != null)
         {
             ItemData selectedItem = ItemManager.Instance.SelectedItemDates[Input];
             foreach (ItemDataConsumable consumable in selectedItem.coumsumables)
             {
-                // ¼Òºñ °¡´ÉÇÑ ¾ÆÀÌÅÛÀÇ È¿°ú¸¦ Àû¿ë
+                // ï¿½Òºï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 switch (consumable.type)
                 {
                     case ConsumableType.Weight:
@@ -257,7 +262,49 @@ public class PlayerController : MonoBehaviour
 
     private void ApplyTrapConsumable(float value)
     {
-        Debug.Log("Àû¿¡°Ô Àû¿ë " + value);
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ " + value);
+    }
+
+
+    private void OnItemUse(int Input)
+    {
+        Debug.Log(toggleInven);
+        Debug.Log(ItemManager.Instance.SelectedItemDates[Input]);
+        //ï¿½Îºï¿½ï¿½ä¸®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ => ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ valueï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½
+        if (toggleInven && ItemManager.Instance.SelectedItemDates[Input] != null)
+        {
+            ItemData selectedItem = ItemManager.Instance.SelectedItemDates[Input];
+            foreach (ItemDataConsumable consumable in selectedItem.coumsumables)
+            {
+                // ï¿½Òºï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+                switch (consumable.type)
+                {
+                    case ConsumableType.Weight:
+                        ApplyWeightConsumable(consumable.value);
+                        break;
+                    case ConsumableType.Speed:
+                        ApplySpeedConsumable(consumable.value);
+                        break;
+                    case ConsumableType.trap:
+                        ApplyTrapConsumable(consumable.value);
+                        break;
+                }
+            }
+        }
+    }
+    private void ApplyWeightConsumable(float value)
+    {
+        weightController.Consume(value);
+    }
+
+    private void ApplySpeedConsumable(float value)
+    {
+        initialSpeed += value;
+    }
+
+    private void ApplyTrapConsumable(float value)
+    {
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ " + value);
     }
 
     public void OnSlide(bool performed)
@@ -304,7 +351,7 @@ public class PlayerController : MonoBehaviour
             characterController.Move(new Vector3(laneSwitchSpeed * Time.deltaTime * direction, 0f, 0f));
 
 
-            //ÇÃ·¹ÀÌ¾î È¸Àü
+            //ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ È¸ï¿½ï¿½
             Quaternion currentRotation = characterController.transform.rotation;
             Quaternion targetQuaternion = Quaternion.Euler(0,targetRotation,0);
             characterController.transform.rotation = Quaternion.Lerp(currentRotation, targetQuaternion,Time.deltaTime * laneSwitchSpeed);
@@ -313,11 +360,11 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
 
-        //ÇÃ·¹ÀÌ¾î À§Ä¡ ½º³»ÇÎ
+        //ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         Vector3 finalPosition = characterController.transform.position;
         finalPosition.x = Mathf.RoundToInt(finalPosition.x / 4) * 4;
         characterController.transform.position = finalPosition;
-        //ÇÃ·¹ÀÌ¾î È¸Àü ¸®¼Â
+        //ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         characterController.transform.rotation = Quaternion.Euler(0,0,0);
 
         isSwitching = false;             
@@ -360,7 +407,7 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator Slide()
     {
-        //ÄÝ¶óÀÌ´õ Å©±â Á¶Á¤
+        //ï¿½Ý¶ï¿½ï¿½Ì´ï¿½ Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         Vector3 originalControllerCenter = characterController.center;
         Vector3 newControllerCenter = originalControllerCenter;
         characterController.height /= 2;
@@ -396,7 +443,7 @@ public class PlayerController : MonoBehaviour
     }
     public void HandleProjectileHit()
     {
-        // ÇÃ·¹ÀÌ¾îÀÇ z À§Ä¡¸¦ -2¸¸Å­ ÀÌµ¿½ÃÅµ´Ï´Ù.
+        // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ z ï¿½ï¿½Ä¡ï¿½ï¿½ -2ï¿½ï¿½Å­ ï¿½Ìµï¿½ï¿½ï¿½Åµï¿½Ï´ï¿½.
         Vector3 newPosition = transform.position;
         newPosition.z -= 5f;
         transform.position = newPosition;

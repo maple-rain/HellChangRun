@@ -12,13 +12,16 @@ public class PlayerInputReader : ScriptableObject, PlayerInputActions.IPlayerAct
     public event UnityAction<bool> Jump = delegate { };
     public event UnityAction<bool> DoubleJump = delegate { };
     public event UnityAction<bool> Slide = delegate { };
-    public event UnityAction<int> ItemUse = delegate { };
     public event UnityAction<bool> Inventory = delegate { };
+    public event UnityAction<int> ItemUse = delegate { };
 
     PlayerInputActions inputActions;
     public bool isOn= false;
 
+    public bool isOn = false;
+
     public float Direction => inputActions.Player.Move.ReadValue<float>();
+ 
 
     void OnEnable()
     {

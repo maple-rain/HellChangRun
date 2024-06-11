@@ -7,7 +7,6 @@ public class WeightController : MonoBehaviour
     public GameObject playerModel;
     public PlayerController player;
 
-
     private float MaxWeghit;
     private float CurWeghit;
     private float playerScale;
@@ -21,7 +20,7 @@ public class WeightController : MonoBehaviour
         MaxWeghit = 100.0f;
         CurWeghit = 50.0f;
         MaxSpeed = 20.0f;
-        CurSpeed = 16.0f;
+        CurSpeed = player.initialSpeed;
         LowScale = 0.01f;
         MaxScale = 0.08f;
     }
