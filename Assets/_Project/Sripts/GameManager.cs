@@ -17,9 +17,6 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private ItemManager itemManager;
 
-    [SerializeField]
-    private MiniGameManager miniGameManager;
-
     protected override void Awake()
     {
         base.Awake();

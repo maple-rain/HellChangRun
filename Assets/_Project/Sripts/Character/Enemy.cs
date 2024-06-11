@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] Transform player;
     [SerializeField] Animator animator;
     [SerializeField] GameObject weaponPrefab;
+    [SerializeField] GameObject EndPanel;
 
     [Header("Movement Settings")]
     [SerializeField] float catchDistance = 1f;
@@ -80,8 +81,8 @@ public class Enemy : MonoBehaviour
     {
         if (collision.collider.CompareTag("Player"))
         {
-            Debug.Log("Player caught!");
-            //게임 오버
+            Time.timeScale = 0f;
+            EndPanel.SetActive(true);
         }
     }
 }
