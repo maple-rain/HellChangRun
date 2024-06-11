@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask groundLayer;
 
     [Header("Movement Settings")]
-    public float initialSpeed = 16f;
+    public float initialSpeed = 10f;
 
     [Header("Jump Settings")]
     [SerializeField] float jumpForce = 15f;
@@ -52,10 +52,12 @@ public class PlayerController : MonoBehaviour
 
     public GameObject QuickSlot;
     public bool toggleInven;
+    public WeightController weightController;
     private void Awake()
     {
         capsuleCollider = GetComponent<CapsuleCollider>();
         characterController= GetComponent<CharacterController>();
+        weightController = GetComponent<WeightController>();
         //groundChecker = GetComponent<GroundChecker>();
         SetupTimers();
         SetupStates();
@@ -228,7 +230,7 @@ public class PlayerController : MonoBehaviour
             ItemData selectedItem = ItemManager.Instance.SelectedItemDates[Input];
             foreach (ItemDataConsumable consumable in selectedItem.coumsumables)
             {
-                // 소비 가능한 아이템의 효과를 적용합니다.
+                // 소비 가능한 아이템의 효과를 적용
                 switch (consumable.type)
                 {
                     case ConsumableType.Weight:
@@ -246,20 +248,17 @@ public class PlayerController : MonoBehaviour
     }
     private void ApplyWeightConsumable(float value)
     {
-        // 플레이어에게 무게 소비 가능 효과를 적용합니다.
-        Debug.Log("무게 소비 가능을 적용합니다. 값: " + value);
+        weightController.Consume(value);
     }
 
     private void ApplySpeedConsumable(float value)
     {
-        // 플레이어에게 속도 소비 가능 효과를 적용합니다.
-        Debug.Log("속도 소비 가능을 적용합니다. 값: " + value);
+        initialSpeed += value;
     }
 
     private void ApplyTrapConsumable(float value)
     {
-        // 플레이어에게 함정 소비 가능 효과를 적용합니다.
-        Debug.Log("함정 소비 가능을 적용합니다. 값: " + value);
+        Debug.Log("적에게 적용 " + value);
     }
 
 
