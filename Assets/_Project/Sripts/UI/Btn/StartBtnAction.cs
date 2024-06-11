@@ -33,6 +33,6 @@ public class StartButtonAction : MonoBehaviour
     
     public void StartBtn()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(1);
     }
 }

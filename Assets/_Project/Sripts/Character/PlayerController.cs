@@ -41,6 +41,10 @@ public class PlayerController : MonoBehaviour
     const float ZeroF = 0f;
     float jumpVelocity;
 
+    public GameObject QuickSlot;
+    public bool toggleInven;
+    public WeightController weightController;
+
     List<Timer> timers;
     CountdownTimer jumpTimer;
     CountdownTimer jumpCooldownTimer;
@@ -48,8 +52,6 @@ public class PlayerController : MonoBehaviour
     CountdownTimer slideCooldownTimer;
     CharacterController characterController;
     StateMachine stateMachine;
-
-    public GameObject QuickSlot;
 
     private void Awake()
     {
@@ -204,14 +206,58 @@ public class PlayerController : MonoBehaviour
     }
     private void OnInventory(bool Inventory)
     {
-        if(Inventory)
+        if (Inventory)
         {
             QuickSlot.SetActive(true);
+            toggleInven = true;
+
         }
         else
         {
             QuickSlot.SetActive(false);
+            toggleInven = false;
         }
+    }
+
+    private void OnItemUse(int Input)
+    {
+        Debug.Log(toggleInven);
+        Debug.Log(ItemManager.Instance.SelectedItemDates[Input]);
+        //인벤토리가 켜지고, 데이터가 있을 때 => 해당 데이터의 value값을 플레이어에게 적용한다
+        if (toggleInven && ItemManager.Instance.SelectedItemDates[Input] != null)
+        {
+            ItemData selectedItem = ItemManager.Instance.SelectedItemDates[Input];
+            foreach (ItemDataConsumable consumable in selectedItem.coumsumables)
+            {
+                // 소비 가능한 아이템의 효과를 적용
+                switch (consumable.type)
+                {
+                    case ConsumableType.Weight:
+                        ApplyWeightConsumable(consumable.value);
+                        break;
+                    case ConsumableType.Speed:
+                        ApplySpeedConsumable(consumable.value);
+                        break;
+                    case ConsumableType.trap:
+                        ApplyTrapConsumable(consumable.value);
+                        break;
+                }
+            }
+        }
+    }
+    private void ApplyWeightConsumable(float value)
+    {
+        weightController.Consume(value);
+    }
+
+    private void ApplySpeedConsumable(float value)
+    {
+        initialSpeed += value;
+    }
+
+    private void ApplyTrapConsumable(float value)
+    {
+        Debug.Log("적에게 적용 " + value);
     }
 
     public void OnSlide(bool performed)

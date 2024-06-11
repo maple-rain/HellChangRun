@@ -12,13 +12,13 @@ public class PlayerInputReader : ScriptableObject, PlayerInputActions.IPlayerAct
     public event UnityAction<bool> Jump = delegate { };
     public event UnityAction<bool> DoubleJump = delegate { };
     public event UnityAction<bool> Slide = delegate { };
-    public event UnityAction<int> UseItem = delegate { };
+    public event UnityAction<int> ItemUse = delegate { };
     public event UnityAction<bool> Inventory = delegate { };
 
     PlayerInputActions inputActions;
+    public bool isOn= false;
 
     public float Direction => inputActions.Player.Move.ReadValue<float>();
-    public float _useItem => inputActions.Player.ItemUse.ReadValue<float>();
 
     void OnEnable()
     {
@@ -95,25 +95,37 @@ public class PlayerInputReader : ScriptableObject, PlayerInputActions.IPlayerAct
 
     public void OnInventory(InputAction.CallbackContext context)
     {
-        switch (context.phase)
+        if (context.phase == InputActionPhase.Started)
         {
-            case InputActionPhase.Started:
-                Inventory.Invoke(true);
-                break;
-            case InputActionPhase.Canceled:
-                Inventory.Invoke(false);
-                break;
+            Inventory.Invoke(toggle());
         }
+    }
+    public bool toggle()
+    {
+        return isOn = !isOn;
     }
 
     public void OnItemUse(InputAction.CallbackContext context)
     {
-        switch (context.phase)
+        if (context.phase == InputActionPhase.Performed)
         {
-            case InputActionPhase.Started:
-                break;
-            case InputActionPhase.Canceled:
-                break;
+            var keyPressed = context.control.displayName;
+
+            switch (keyPressed)
+            {
+                case "Q":
+                    ItemUse(0);
+                    break;
+                case "W":
+                    ItemUse(1);
+                    break;
+                case "E":
+                    ItemUse(2);
+                    break;
+                case "R":
+                    ItemUse(3);
+                    break;
+            }
         }
     }
 }
