@@ -47,17 +47,7 @@
   + 구매한 아이템은 오른쪽위 버튼을 통해 진입가능한 인벤토리에서 확인할수있습니다
   2. 인벤토리 구성
     ![image](https://github.com/maple-rain/HellChangRun/assets/44717239/f78a12cf-f86d-4608-a450-301e0fb002cf)
-    + 상점에서 구매한아이템이 인벤토리에 갯수별로 쌓여있는것을확인할수있습니다
-    + 인벤토리의 아이템은 장착 , 판매 등의 기능을 사용할수있습니다
-      ![image](https://github.com/maple-rain/HellChangRun/assets/44717239/1dfaf07e-a261-4d27-af7f-50bc6e72784e)
-
-
-2. 게임 시작씬
-   ![image](https://github.com/maple-rain/HellChangRun/assets/44717239/3e2343e1-639b-40ac-a013-463aa4b99cff)
-   ![image](https://github.com/maple-rain/HellChangRun/assets/44717239/235be944-cac3-4b55-86be-b6897c3fa403)
-
-+ 게임이 시작되면 플레이어는 왼쪽, 가운데, 오른쪽 길을 좌우 방향키를 눌러 이동할 수 있으며 음식을 먹어서 좌측 하단에 있는 몸무게 수치를 적정으로 유지해야합니다.
-</br> + 정크푸드를 많이 먹어서 체중이 증가하면 플레이어의 속도가 느려지게 되면 뒤에서 쫓아오는 헬창에게 잡히게됩니다.
+    + 상점에서너에게 잡히게됩니다.
 </br> + 길에는 장애물들이 스폰되어 충돌되지 않도록 피해야합니다.
 
 
