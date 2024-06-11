@@ -8,6 +8,7 @@ public class SlideState : BaseState
 
     public override void OnEnter()
     {
+        SfxManager.Instance.PlaySlideSound();
         Debug.Log("SlideState.OnEnter");
         animator.CrossFade(SlideHash,crossFadeDuration);
     }

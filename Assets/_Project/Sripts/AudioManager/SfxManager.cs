@@ -32,4 +32,10 @@ public class SfxManager : Singleton<SfxManager>
         audioSourceSFX.clip = sfxClips[2];
         audioSourceSFX.Play();
     }
+
+    public void PlaySlideSound()
+    {
+        audioSourceSFX.clip = sfxClips[3];
+        audioSourceSFX.Play();
+    }
 }
