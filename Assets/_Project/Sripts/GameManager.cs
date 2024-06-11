@@ -6,12 +6,6 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {  
     
-    [SerializeField]
-    private AudioManager audioManager;
-
-    [SerializeField]
-    private CharacterManager characterManager;
-
     public MapManager mapManager;
 
     [SerializeField]
